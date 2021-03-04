@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/routes.dart';
-import 'package:bmc304_assignment_crs/screens/profile/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/splash/splash_screen.dart';
 import 'package:bmc304_assignment_crs/theme.dart';
 

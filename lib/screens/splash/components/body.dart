@@ -3,7 +3,6 @@ import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
 
-// This is the best practice
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
 
@@ -16,16 +15,21 @@ class _BodyState extends State<Body> {
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
-      "text": "Welcome to Tokoto, Let’s shop!",
+      "text": "Crisis Relief Services (CRS) is an NGO that aims to help people who "
+          "are facing crises arising from natural disasters",
+      "subtitle": "Who are we?",
       "image": "assets/images/splash_1.png"
     },
     {
-      "text":
-          "We help people conect with store \naround United State of America",
+      "text": "We keep ourselves vigilant regarding disasters happening. \n We decide which of our volunteers"
+      " is qualified for the job",
+      "subtitle": "CRS Admin",
       "image": "assets/images/splash_2.png"
     },
     {
-      "text": "We show the easy way to shop. \nJust stay at home with us",
+      "text": "Got the appropriate skills and time?\n "
+          "Register now and lend us and the crisis victims a hand. We would appreciate it.",
+      "subtitle": "Volunteer",
       "image": "assets/images/splash_3.png"
     },
   ];
@@ -47,6 +51,7 @@ class _BodyState extends State<Body> {
                 itemCount: splashData.length,
                 itemBuilder: (context, index) => SplashContent(
                   image: splashData[index]["image"],
+                  subtitle: splashData[index]["subtitle"],
                   text: splashData[index]['text'],
                 ),
               ),
@@ -55,7 +60,7 @@ class _BodyState extends State<Body> {
               flex: 2,
               child: Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: getProportionateScreenWidth(20)),
+                    horizontal: (20)),
                 child: Column(
                   children: <Widget>[
                     Spacer(),
@@ -68,9 +73,9 @@ class _BodyState extends State<Body> {
                     ),
                     Spacer(flex: 3),
                     DefaultButton(
-                      text: "Continue",
+                      text: "Let's Go",
                       press: () {
-                        Navigator.pushNamed(context, SignInScreen.routeName);
+                        Navigator.pushReplacementNamed(context, SignInScreen.routeName);
                       },
                     ),
                     Spacer(),

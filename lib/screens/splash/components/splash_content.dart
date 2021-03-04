@@ -7,9 +7,10 @@ class SplashContent extends StatelessWidget {
   const SplashContent({
     Key key,
     this.text,
+    this.subtitle,
     this.image,
   }) : super(key: key);
-  final String text, image;
+  final String text, subtitle, image;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SplashContent extends StatelessWidget {
       children: <Widget>[
         Spacer(),
         Text(
-          "TOKOTO",
+          "CRS",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
             color: kPrimaryColor,
@@ -25,14 +26,22 @@ class SplashContent extends StatelessWidget {
           ),
         ),
         Text(
+          subtitle,
+          style: TextStyle(
+            fontSize: getProportionateScreenWidth(20),
+            color: kSecondaryColor,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
           text,
           textAlign: TextAlign.center,
         ),
-        Spacer(flex: 2),
+        Spacer(),
         Image.asset(
           image,
-          height: getProportionateScreenHeight(265),
-          width: getProportionateScreenWidth(235),
+          height: getProportionateScreenHeight(240),
+          width: getProportionateScreenWidth(210),
         ),
       ],
     );
