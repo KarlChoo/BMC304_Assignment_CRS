@@ -1,9 +1,11 @@
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
 import 'package:bmc304_assignment_crs/helper/keyboard.dart';
 import 'package:bmc304_assignment_crs/screens/forgot_password/forgot_password_screen.dart';
 import 'package:bmc304_assignment_crs/screens/login_success/login_success_screen.dart';
+import 'package:provider/provider.dart';
 
 import '../../../components/default_button.dart';
 import '../../../constants.dart';
@@ -15,6 +17,8 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String username;
   String password;
@@ -37,12 +41,13 @@ class _SignFormState extends State<SignForm> {
 
   @override
   Widget build(BuildContext context) {
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
         children: [
           buildUsernameFormField(),
-          //SizedBox(height: getProportionateScreenHeight(1)),
+          SizedBox(height: getProportionateScreenHeight(20)),
           buildPasswordFormField(),
           Row(
             children: [
@@ -71,12 +76,18 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Log In",
-            press: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                // if all are valid then go to success screen
-                KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+            press: () async {
+              final response = await staffProvider.login(
+                  usernameController.text, passwordController.text);
+              if (response != null) {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  // if all are valid then go to success screen
+                  KeyboardUtil.hideKeyboard(context);
+                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                }
+                usernameController.text = '';
+                passwordController.text = '';
               }
             },
           ),
@@ -86,7 +97,9 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildPasswordFormField() {
+    passwordController.text = 'admin123456';
     return TextFormField(
+      controller: passwordController,
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
@@ -119,7 +132,9 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildUsernameFormField() {
+    usernameController.text = 'admin';
     return TextFormField(
+      controller: usernameController,
       keyboardType: TextInputType.text,
       onSaved: (newValue) => username = newValue,
       onChanged: (value) {
