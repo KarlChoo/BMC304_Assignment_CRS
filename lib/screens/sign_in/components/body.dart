@@ -36,15 +36,21 @@ class Body extends StatelessWidget {
                   children: [
                     SocalCard(
                       icon: "assets/icons/google-icon.svg",
-                      press: () {},
+                      press: () {
+                        print('Login with google');
+                      },
                     ),
                     SocalCard(
                       icon: "assets/icons/facebook-2.svg",
-                      press: () {},
+                      press: () {
+                        print('Login with facebook');
+                      },
                     ),
                     SocalCard(
                       icon: "assets/icons/twitter.svg",
-                      press: () {},
+                      press: () {
+                        print('Login with twitter');
+                      },
                     ),
                   ],
                 ),
