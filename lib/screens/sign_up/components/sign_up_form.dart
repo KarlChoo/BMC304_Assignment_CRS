@@ -1,3 +1,6 @@
+import 'package:bmc304_assignment_crs/models/staff.dart';
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
@@ -6,7 +9,7 @@ import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
-
+import 'package:provider/provider.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -14,9 +17,12 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
+  TextEditingController username2 = TextEditingController();
+  TextEditingController email2 = TextEditingController();
+  TextEditingController password2 = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String email;
-  String password;
+  String email3;
+  String password3;
   String confirmPassword;
   bool remember = false;
   final List<String> errors = [];
@@ -37,6 +43,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -48,16 +55,36 @@ class _SignUpFormState extends State<SignUpForm> {
           buildConformPassFormField(),
           FormError(errors: errors),
           SizedBox(height: getProportionateScreenHeight(40)),
-          DefaultButton(
-            text: "Continue",
-            press: () {
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                // if all are valid then go to success screen
-                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
-              }
-            },
-          ),
+          ElevatedButton(
+              child: Text("Continue"),
+              onPressed: () async {
+                if (password2.text.isNotEmpty) {
+                  Staff newStaff = Staff(
+                    username: 'admin',
+                    password: 'admin123456',
+                    phone: '018273733',
+                    address: 'jiwejiqje',
+                    email: 'test@gmail.com',
+                    dateJoined: DateTime.now().microsecondsSinceEpoch,
+                    position: 'Manager',
+                  );
+                  // final isUserExist = await staffProvider.isUserExist(email2.text);
+                  // if (isUserExist == false) {
+                  print(newStaff.email);
+                  final response = await staffProvider.addStaff(newStaff);
+                  if (response.id != null) {
+                    if (_formKey.currentState.validate()) {
+                      _formKey.currentState.save();
+                      // if all are valid then go to success screen
+                      Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          SignInScreen.routeName,
+                          (Route<dynamic> route) => false);
+                    }
+                    //false means remove all the page before this.
+                  }
+                }
+              }),
         ],
       ),
     );
@@ -67,10 +94,11 @@ class _SignUpFormState extends State<SignUpForm> {
     return TextFormField(
       obscureText: true,
       onSaved: (newValue) => confirmPassword = newValue,
+      controller: password2,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.isNotEmpty && password == confirmPassword) {
+        } else if (value.isNotEmpty && password3 == confirmPassword) {
           removeError(error: kMatchPassError);
         }
         confirmPassword = value;
@@ -79,7 +107,7 @@ class _SignUpFormState extends State<SignUpForm> {
         if (value.isEmpty) {
           addError(error: kPassNullError);
           return "";
-        } else if ((password != value)) {
+        } else if ((password3 != value)) {
           addError(error: kMatchPassError);
           return "";
         }
@@ -99,14 +127,15 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildPasswordFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => password = newValue,
+      onSaved: (newValue) => password3 = newValue,
+      controller: password2,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
         } else if (value.length >= 8) {
           removeError(error: kShortPassError);
         }
-        password = value;
+        password3 = value;
       },
       validator: (value) {
         if (value.isEmpty) {
@@ -131,8 +160,9 @@ class _SignUpFormState extends State<SignUpForm> {
 
   TextFormField buildEmailFormField() {
     return TextFormField(
+      controller: email2,
       keyboardType: TextInputType.emailAddress,
-      onSaved: (newValue) => email = newValue,
+      onSaved: (newValue) => email3 = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kEmailNullError);

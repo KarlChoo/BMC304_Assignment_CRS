@@ -37,7 +37,8 @@ class Body extends StatelessWidget {
             text: "Log Out",
             icon: "assets/icons/Log out.svg",
             press: () {
-              Navigator.pushReplacementNamed(context, SignInScreen.routeName);
+              Navigator.pushNamedAndRemoveUntil(context, SignInScreen.routeName,
+                  (Route<dynamic> route) => false);
             },
           ),
         ],

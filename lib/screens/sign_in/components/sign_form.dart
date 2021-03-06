@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:bmc304_assignment_crs/providers/user_provider.dart';
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
 import 'package:bmc304_assignment_crs/helper/keyboard.dart';
 import 'package:bmc304_assignment_crs/screens/forgot_password/forgot_password_screen.dart';
 import 'package:bmc304_assignment_crs/screens/login_success/login_success_screen.dart';
-
 import 'package:provider/provider.dart';
 
 import '../../../components/default_button.dart';
@@ -20,14 +20,13 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String username;
   String password;
   bool remember = false;
   final List<String> errors = [];
-
-  TextEditingController usernameTextController = new TextEditingController();
-  TextEditingController passwordTextController = new TextEditingController();
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -46,8 +45,9 @@ class _SignFormState extends State<SignForm> {
   @override
   Widget build(BuildContext context) {
 
-    final userProvider = Provider.of<UserProvider>(context);
+    //final userProvider = Provider.of<UserProvider>(context);
 
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -82,19 +82,33 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Log In",
-            press: () async{
-              if (_formKey.currentState.validate()) {
-                _formKey.currentState.save();
-                KeyboardUtil.hideKeyboard(context);
-              // if all are valid then go to success screen
-                final response = await userProvider.login(usernameTextController.text,passwordTextController.text);
-                if(response != null){
-                  print('Login success');
-                  sleep(Duration(seconds: 2));
-                  print('Login success');
-                  //Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-                }
+            // press: () async{
+            //   if (_formKey.currentState.validate()) {
+            //     _formKey.currentState.save();
+            //     KeyboardUtil.hideKeyboard(context);
+            //   // if all are valid then go to success screen
+            //     final response = await userProvider.login(usernameTextController.text,passwordTextController.text);
+            //     if(response != null){
+            //       print('Login success');
+            //       sleep(Duration(seconds: 2));
+            //       print('Login success');
+            //       //Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+            //     }
+            //   }
+            // }
 
+            press: () async {
+              final response = await staffProvider.login(
+                  usernameController.text, passwordController.text);
+              if (response != null) {
+                if (_formKey.currentState.validate()) {
+                  _formKey.currentState.save();
+                  // if all are valid then go to success screen
+                  KeyboardUtil.hideKeyboard(context);
+                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                }
+                usernameController.text = '';
+                passwordController.text = '';
               }
             },
           ),
@@ -104,7 +118,9 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildPasswordFormField() {
+    passwordController.text = 'admin123456';
     return TextFormField(
+      controller: passwordController,
       obscureText: true,
       onSaved: (newValue) => password = newValue,
       onChanged: (value) {
@@ -115,7 +131,6 @@ class _SignFormState extends State<SignForm> {
         }
         return null;
       },
-      controller: passwordTextController,
       validator: (value) {
         if (value.isEmpty) {
           addError(error: kPassNullError);
@@ -138,7 +153,9 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildUsernameFormField() {
+    usernameController.text = 'admin';
     return TextFormField(
+      controller: usernameController,
       keyboardType: TextInputType.text,
       onSaved: (newValue) => username = newValue,
       onChanged: (value) {
@@ -147,7 +164,6 @@ class _SignFormState extends State<SignForm> {
         }
         return null;
       },
-      controller: usernameTextController,
       validator: (value) {
         if (value.isEmpty) {
           addError(error: kEmailNullError);

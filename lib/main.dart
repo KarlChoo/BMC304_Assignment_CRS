@@ -1,4 +1,5 @@
 import 'package:bmc304_assignment_crs/providers/user_provider.dart';
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/routes.dart';
 import 'package:bmc304_assignment_crs/screens/splash/splash_screen.dart';
@@ -15,12 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-            create: (context) => UserProvider(),
-        )
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => StaffProvider()),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: theme(),
         // home: SplashScreen(),
