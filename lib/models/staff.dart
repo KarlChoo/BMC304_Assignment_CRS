@@ -1,9 +1,13 @@
+import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/models/user.dart';
 import 'package:flutter/material.dart';
 
 class Staff extends User {
   final String position;
   final int dateJoined;
+
+  final List<Trip> organizedTrips = [];
+
   Staff(
       {String id,
       @required String username,
