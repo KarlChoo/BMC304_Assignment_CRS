@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Document with ChangeNotifier {
   final String id;
   final String documentType;
-  final DateTime expireDate;
+  final int expireDate;
   final Image documentImage;
   final String volunteerId;
 

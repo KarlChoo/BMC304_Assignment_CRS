@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 class Application with ChangeNotifier {
   final String applicationId;
-  final DateTime applicationDate = DateTime.now();
-  final String status = "NEW";
+  final int applicationDate;
+  final String status = "New";
   final String remarks;
 
   final String tripId;
@@ -11,6 +11,7 @@ class Application with ChangeNotifier {
 
   Application({
     this.applicationId,
+    @required this.applicationDate,
     @required this.remarks,
     @required this.tripId,
     @required this.volunteerId

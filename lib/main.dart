@@ -1,4 +1,4 @@
-import 'package:bmc304_assignment_crs/providers/user_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/routes.dart';
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => VolunteerProvider()),
         ChangeNotifierProvider(create: (context) => StaffProvider()),
       ],
       child: MaterialApp(

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class Volunteer extends User {
    List<Document> volunteerDocument = [];
-   List<Application> applicationList =[];
+   List<Application> applicationList = [];
 
    Volunteer({
       id,
@@ -14,5 +14,12 @@ class Volunteer extends User {
       @required email,
       @required phone,
       @required address,
-   });
+   }): super(
+       username: username,
+       password: password,
+       email: email,
+       phone: phone,
+       address: address,
+       id: id
+   );
 }
