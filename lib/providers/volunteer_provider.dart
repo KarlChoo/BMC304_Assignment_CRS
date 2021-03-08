@@ -5,18 +5,18 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-class VolunteerProvider with ChangeNotifier{
-
-  User currentVolunteer;
-  List<User> _systemVolunteers = [];
-  List<User> get systemVolunteers => _systemVolunteers;
+class VolunteerProvider with ChangeNotifier {
+  Volunteer currentVolunteer;
+  List<Volunteer> _systemVolunteers = [];
+  List<Volunteer> get systemVolunteers => _systemVolunteers;
 
   List<Volunteer> volunteers = [];
   List<Staff> staffs = [];
 
-  String volunteerFileURL = "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json";
+  String volunteerFileURL =
+      "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json";
 
-  Future<User> login(String username, String password) async{
+  Future<User> login(String username, String password) async {
     try {
       final response = await http.get(volunteerFileURL);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
@@ -44,7 +44,7 @@ class VolunteerProvider with ChangeNotifier{
   }
 
   //Needs to be cross checked with the array in staff array through provider
-  Future<bool> isUserExist(String username) async {
+  Future<bool> isVolunteerExist(String username) async {
     try {
       bool result = false;
       final response = await http.get(volunteerFileURL);
@@ -62,7 +62,40 @@ class VolunteerProvider with ChangeNotifier{
     }
   }
 
-  // Future<void> populateData() async{
+  Future<Volunteer> addVolunteer(Volunteer volunteer) async {
+    final response = await http.post(volunteerFileURL,
+        body: json.encode({
+          'username': volunteer.username,
+          'password': volunteer.password,
+          'email': volunteer.email,
+          'phone': volunteer.phone,
+          'address': volunteer.address,
+        }));
+    Volunteer newVolunteer = Volunteer(
+      id: json.decode(
+          response.body)['name'], //name is the database name for the data
+      username: volunteer.username,
+      password: volunteer.password,
+      email: volunteer.email,
+      phone: volunteer.phone,
+      address: volunteer.address,
+    );
+    currentVolunteer = newVolunteer;
+    notifyListeners();
+    return currentVolunteer;
+  }
+
+  Future<void> signoutVolunteer() async {
+    currentVolunteer = Volunteer(
+      username: '',
+      password: '',
+      phone: '',
+      email: '',
+      address: '',
+    );
+  }
+
+// Future<void> populateData() async{
   //   try{
   //     // List<User> sampleUsers = [
   //     //

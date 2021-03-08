@@ -89,7 +89,7 @@ class StaffProvider extends ChangeNotifier {
     return currentStaff;
   }
 
-  Future<void> signoutUser() async {
+  Future<void> signoutStaff() async {
     currentStaff = Staff(
         username: '',
         password: '',

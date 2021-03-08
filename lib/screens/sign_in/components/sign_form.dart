@@ -20,13 +20,21 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController usernameController =
+      TextEditingController(text: 'admin');
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String username;
   String password;
   bool remember = false;
   final List<String> errors = [];
+
+  var _type = [
+    'Staff',
+    'Volunteer',
+  ];
+
+  String _typeSelected;
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -44,10 +52,9 @@ class _SignFormState extends State<SignForm> {
 
   @override
   Widget build(BuildContext context) {
-
-    //final userProvider = Provider.of<UserProvider>(context);
-
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -55,6 +62,32 @@ class _SignFormState extends State<SignForm> {
           buildUsernameFormField(),
           SizedBox(height: getProportionateScreenHeight(20)),
           buildPasswordFormField(),
+          SizedBox(height: getProportionateScreenHeight(20)),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: DropdownButton(
+              isExpanded: true,
+              hint: Text(
+                'Select Your Account Type',
+                style: TextStyle(fontSize: 16),
+              ),
+              items: _type.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Text(
+                    dropDownStringItem,
+                    style: TextStyle(fontSize: 16),
+                  ),
+                );
+              }).toList(),
+              onChanged: (String newValueSelected) {
+                setState(() {
+                  _typeSelected = newValueSelected;
+                });
+              },
+              value: _typeSelected,
+            ),
+          ),
           Row(
             children: [
               Checkbox(
@@ -98,17 +131,43 @@ class _SignFormState extends State<SignForm> {
             // }
 
             press: () async {
-              final response = await staffProvider.login(
-                  usernameController.text, passwordController.text);
-              if (response != null) {
-                if (_formKey.currentState.validate()) {
-                  _formKey.currentState.save();
-                  // if all are valid then go to success screen
-                  KeyboardUtil.hideKeyboard(context);
-                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+              if (_formKey.currentState.validate()) {
+                _formKey.currentState.save();
+                // if all are valid then go to success screen
+                KeyboardUtil.hideKeyboard(context);
+                if (_typeSelected == 'Staff') {
+                  final response = await staffProvider.login(
+                      usernameController.text, passwordController.text);
+                  if (response != null) {
+                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                    usernameController.text = '';
+                    passwordController.text = '';
+                  } else {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Wrong Username or Password!'),
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
                 }
-                usernameController.text = '';
-                passwordController.text = '';
+                if (_typeSelected == 'Volunteer') {
+                  final response = await volunteerProvider.login(
+                      usernameController.text, passwordController.text);
+                  if (response != null) {
+                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                    usernameController.text = '';
+                    passwordController.text = '';
+                  } else {
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Wrong Username or Password!'),
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
+                } else {
+                  Scaffold.of(context).showSnackBar(SnackBar(
+                    content: Text('Please select the account type to login!'),
+                    duration: Duration(seconds: 2),
+                  ));
+                }
               }
             },
           ),
@@ -153,7 +212,6 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildUsernameFormField() {
-    usernameController.text = 'admin';
     return TextFormField(
       controller: usernameController,
       keyboardType: TextInputType.text,
