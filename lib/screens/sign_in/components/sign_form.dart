@@ -82,21 +82,6 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Log In",
-            // press: () async{
-            //   if (_formKey.currentState.validate()) {
-            //     _formKey.currentState.save();
-            //     KeyboardUtil.hideKeyboard(context);
-            //   // if all are valid then go to success screen
-            //     final response = await userProvider.login(usernameTextController.text,passwordTextController.text);
-            //     if(response != null){
-            //       print('Login success');
-            //       sleep(Duration(seconds: 2));
-            //       print('Login success');
-            //       //Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-            //     }
-            //   }
-            // }
-
             press: () async {
               final response = await staffProvider.login(
                   usernameController.text, passwordController.text);
@@ -118,7 +103,7 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildPasswordFormField() {
-    passwordController.text = 'admin123456';
+    //passwordController.text = 'admin123456';
     return TextFormField(
       controller: passwordController,
       obscureText: true,
@@ -153,7 +138,7 @@ class _SignFormState extends State<SignForm> {
   }
 
   TextFormField buildUsernameFormField() {
-    usernameController.text = 'admin';
+    //usernameController.text = 'admin';
     return TextFormField(
       controller: usernameController,
       keyboardType: TextInputType.text,

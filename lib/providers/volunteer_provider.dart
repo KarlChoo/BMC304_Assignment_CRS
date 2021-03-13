@@ -45,8 +45,8 @@ class VolunteerProvider with ChangeNotifier{
 
   //Needs to be cross checked with the array in staff array through provider
   Future<bool> isUserExist(String username) async {
+    bool result = false;
     try {
-      bool result = false;
       final response = await http.get(volunteerFileURL);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
@@ -56,10 +56,10 @@ class VolunteerProvider with ChangeNotifier{
           }
         });
       }
-      return result;
     } catch (error) {
       print(error);
     }
+    return result;
   }
 
   // Future<void> populateData() async{

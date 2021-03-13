@@ -9,11 +9,40 @@ class StaffProvider extends ChangeNotifier {
   List<Staff> _systemStaffs = [];
   List<Staff> get systemStaffs => _systemStaffs;
 
-  List<Staff> staffs = [];
+  //List<Staff> staffs = [];
+  String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+
+  Future<void> getAllSystemStaff() async{
+    try {
+      final response = await http.get(url);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Staff> loadingStaff = [];
+
+      if (extractedData != null || extractedData.length > 0) {
+        extractedData.forEach((staffId, staffData) {
+          Staff newStaff = Staff(
+              id: staffId,
+              username: staffData["username"],
+              password: staffData["password"],
+              email: staffData["email"],
+              address: staffData["address"],
+              phone: staffData["phone"],
+              position: staffData["position"],
+              dateJoined: staffData["dateJoined"]
+          );
+          loadingStaff.add(newStaff);
+        });
+        _systemStaffs = loadingStaff;
+        notifyListeners();
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
 
   Future<Staff> login(String username, String password) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+      //String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
@@ -42,7 +71,7 @@ class StaffProvider extends ChangeNotifier {
 
   Future<bool> isUserExist(String username) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+      //String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {

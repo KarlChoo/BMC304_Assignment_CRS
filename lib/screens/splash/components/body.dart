@@ -1,7 +1,12 @@
+import 'dart:math';
+
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
+import 'package:provider/provider.dart';
 
 import '../components/splash_content.dart';
 import '../../../components/default_button.dart';
@@ -12,6 +17,24 @@ class Body extends StatefulWidget {
 }
 
 class _BodyState extends State<Body> {
+  bool isInit = true;
+  @override
+  void didChangeDependencies() async{
+    if(isInit){
+      final staffProvider = Provider.of<StaffProvider>(context);
+      final volunteerProvider = Provider.of<VolunteerProvider>(context);
+
+      print('Loading Data');
+      await Future.wait([
+        staffProvider.getAllSystemStaff(),
+      ]);
+      print('Data loaded');
+      print(staffProvider.systemStaffs);
+    }
+    isInit = false;
+    super.didChangeDependencies();
+  }
+
   int currentPage = 0;
   List<Map<String, String>> splashData = [
     {
@@ -101,4 +124,5 @@ class _BodyState extends State<Body> {
       ),
     );
   }
+
 }
