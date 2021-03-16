@@ -13,7 +13,8 @@ class StaffProvider extends ChangeNotifier {
 
   Future<Staff> login(String username, String password) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+      Uri url = Uri.parse(
+          'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json');
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
@@ -42,7 +43,8 @@ class StaffProvider extends ChangeNotifier {
 
   Future<bool> isUserExist(String username) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+      Uri url = Uri.parse(
+          'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json');
       final response = await http.get(url);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
@@ -60,7 +62,8 @@ class StaffProvider extends ChangeNotifier {
 
   Future<Staff> addStaff(Staff staff) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
+      Uri url = Uri.parse(
+          'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json');
       final response = await http.post(url,
           body: json.encode({
             'username': staff.username,
@@ -72,7 +75,8 @@ class StaffProvider extends ChangeNotifier {
             'dateJoined': staff.dateJoined,
           }));
       Staff newStaff = Staff(
-        id: json.decode(response.body)['name'], //name is the database name for the data id
+        id: json.decode(
+            response.body)['name'], //name is the database name for the data id
         username: staff.username,
         password: staff.password,
         email: staff.email,
@@ -97,7 +101,6 @@ class StaffProvider extends ChangeNotifier {
         email: '',
         address: '',
         position: '',
-        dateJoined: null
-    );
+        dateJoined: null);
   }
 }

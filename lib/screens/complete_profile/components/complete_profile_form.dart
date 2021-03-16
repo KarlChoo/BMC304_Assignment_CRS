@@ -23,11 +23,15 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
   TextEditingController phoneNumberController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController lastNameController = TextEditingController();
+  TextEditingController firstNameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final List<String> errors = [];
   String email;
   String phoneNumber;
   String address;
+  String lastName;
+  String firstName;
 
   void addError({String error}) {
     if (!errors.contains(error))
@@ -51,6 +55,10 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       key: _formKey,
       child: Column(
         children: [
+          buildFirstNameFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
+          buildLastNameFormField(),
+          SizedBox(height: getProportionateScreenHeight(30)),
           buildEmailFormField(),
           SizedBox(height: getProportionateScreenHeight(30)),
           buildPhoneNumberFormField(),
@@ -68,6 +76,8 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                   email: emailController.text,
                   phone: phoneNumberController.text,
                   address: addressController.text,
+                  firstName: firstNameController.text,
+                  lastName: lastNameController.text,
                 );
                 final isVolunteerExist =
                     await volunteerProvider.isVolunteerExist(widget.username);
@@ -143,6 +153,62 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
         // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+      ),
+    );
+  }
+
+  TextFormField buildLastNameFormField() {
+    return TextFormField(
+      onSaved: (newValue) => lastName = newValue,
+      controller: lastNameController,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kNamelNullError);
+        }
+        return null;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kNamelNullError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "Last Name",
+        hintText: "Enter your last name",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
+      ),
+    );
+  }
+
+  TextFormField buildFirstNameFormField() {
+    return TextFormField(
+      onSaved: (newValue) => firstName = newValue,
+      controller: firstNameController,
+      onChanged: (value) {
+        if (value.isNotEmpty) {
+          removeError(error: kNamelNullError);
+        }
+        return null;
+      },
+      validator: (value) {
+        if (value.isEmpty) {
+          addError(error: kNamelNullError);
+          return "";
+        }
+        return null;
+      },
+      decoration: InputDecoration(
+        labelText: "First Name",
+        hintText: "Enter your first name",
+        // If  you are using latest version of flutter then lable text and hint text shown like this
+        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }

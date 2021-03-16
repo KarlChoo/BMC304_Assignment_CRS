@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
-abstract class User with ChangeNotifier{
+abstract class User with ChangeNotifier {
   final String id;
   final String username;
   final String password;
   final String email;
   final String phone;
   final String address;
+  final String firstName;
+  final String lastName;
 
   User({
     this.id,
@@ -14,6 +16,8 @@ abstract class User with ChangeNotifier{
     @required this.password,
     @required this.email,
     @required this.phone,
-    @required this.address
+    @required this.address,
+    @required this.firstName,
+    @required this.lastName,
   });
 }
