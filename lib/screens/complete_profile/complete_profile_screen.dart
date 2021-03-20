@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'components/body.dart';
 
 class CompleteProfileScreen extends StatelessWidget {
-  String username;
-  String password;
+  final String username;
+  final String password;
   CompleteProfileScreen({this.username, this.password});
   static String routeName = "/complete_profile";
   @override

@@ -1,3 +1,4 @@
+import 'package:bmc304_assignment_crs/components/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatefulWidget {
@@ -12,7 +13,6 @@ class _BodyState extends State<Body> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-              Text("staff home")
           ],
         ),
       )

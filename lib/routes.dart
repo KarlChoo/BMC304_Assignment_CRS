@@ -1,3 +1,8 @@
+import 'package:bmc304_assignment_crs/screens/staff_add_admin/staff_add_admin.dart';
+import 'package:bmc304_assignment_crs/screens/staff_edit_admin/staff_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/staff_home/staff_home.dart';
+import 'package:bmc304_assignment_crs/screens/staff_manage_admin/staff_manage_admin.dart';
+import 'package:bmc304_assignment_crs/screens/staff_manage_staffs/staff_manage_managers.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bmc304_assignment_crs/screens/cart/cart_screen.dart';
 import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_screen.dart';
@@ -12,7 +17,6 @@ import 'package:bmc304_assignment_crs/screens/splash/splash_screen.dart';
 
 import 'screens/sign_up/sign_up_screen.dart';
 
-// We use name route
 // All our routes will be available here
 final Map<String, WidgetBuilder> routes = {
   SplashScreen.routeName: (context) => SplashScreen(),
@@ -26,4 +30,9 @@ final Map<String, WidgetBuilder> routes = {
   DetailsScreen.routeName: (context) => DetailsScreen(),
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
+  StaffHome.routeName: (context) => StaffHome(),
+  StaffManageAdmin.routeName: (context) => StaffManageAdmin(),
+  StaffManageManagers.routeName: (context) => StaffManageManagers(),
+  StaffAddAdmin.routeName: (context) => StaffAddAdmin(),
+  StaffEditAdmin.routeName : (context) => StaffEditAdmin()
 };

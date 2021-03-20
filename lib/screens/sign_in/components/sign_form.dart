@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +18,7 @@ class SignForm extends StatefulWidget {
 }
 
 class _SignFormState extends State<SignForm> {
-  TextEditingController usernameController =
-      TextEditingController(text: 'admin');
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String username;
@@ -53,8 +50,7 @@ class _SignFormState extends State<SignForm> {
   @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
-    VolunteerProvider volunteerProvider =
-        Provider.of<VolunteerProvider>(context);
+    VolunteerProvider volunteerProvider = Provider.of<VolunteerProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -78,6 +74,9 @@ class _SignFormState extends State<SignForm> {
                     dropDownStringItem,
                     style: TextStyle(fontSize: 16),
                   ),
+                  onTap: () {
+                    KeyboardUtil.hideKeyboard(context);
+                  },
                 );
               }).toList(),
               onChanged: (String newValueSelected) {
@@ -123,32 +122,39 @@ class _SignFormState extends State<SignForm> {
                 if (_typeSelected == 'Staff') {
                   final response = await staffProvider.login(
                       usernameController.text, passwordController.text);
-                  if (response != null) {
-                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                  if (response == 0) {
+                    //Login successful
+                    Navigator.pushReplacementNamed(context, LoginSuccessScreen.routeName);
                     usernameController.text = '';
                     passwordController.text = '';
-                  } else {
-                    Scaffold.of(context).showSnackBar(SnackBar(
+                  } else if (response == 1) {
+                    //Login failed
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Wrong Username or Password!'),
                       duration: Duration(seconds: 2),
                     ));
+                  } else if (response == 2) {
+                    //Suspended
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Account has been suspended'),
+                      duration: Duration(seconds: 2),
+                    ));
                   }
-                }
-                if (_typeSelected == 'Volunteer') {
+                }else if (_typeSelected == 'Volunteer') {
                   final response = await volunteerProvider.login(
                       usernameController.text, passwordController.text);
                   if (response != null) {
-                    Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                    Navigator.pushReplacementNamed(context, LoginSuccessScreen.routeName);
                     usernameController.text = '';
                     passwordController.text = '';
                   } else {
-                    Scaffold.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text('Wrong Username or Password!'),
                       duration: Duration(seconds: 2),
                     ));
                   }
                 } else {
-                  Scaffold.of(context).showSnackBar(SnackBar(
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     content: Text('Please select the account type to login!'),
                     duration: Duration(seconds: 2),
                   ));
@@ -187,6 +193,7 @@ class _SignFormState extends State<SignForm> {
       },
       decoration: InputDecoration(
         labelText: "Password",
+        errorStyle: TextStyle(height: 0),
         hintText: "Enter your password",
         // If  you are using latest version of flutter then lable text and hint text shown like this
         // if you r using flutter less then 1.20.* then maybe this is not working properly
@@ -216,6 +223,7 @@ class _SignFormState extends State<SignForm> {
       },
       decoration: InputDecoration(
         labelText: "Username",
+        errorStyle: TextStyle(height: 0),
         hintText: "Enter your username",
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),

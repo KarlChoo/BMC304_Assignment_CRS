@@ -5,15 +5,14 @@ import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
-import 'package:bmc304_assignment_crs/screens/otp/otp_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class CompleteProfileForm extends StatefulWidget {
-  String username;
-  String password;
+  final String username;
+  final String password;
   CompleteProfileForm({this.username, this.password});
   @override
   _CompleteProfileFormState createState() => _CompleteProfileFormState();

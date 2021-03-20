@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../size_config.dart';
 
 class DiscountBanner extends StatelessWidget {
-  String position = '';
+  //String position = '';
 
   DiscountBanner({
     Key key,
@@ -13,9 +13,9 @@ class DiscountBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
-    if (staffProvider.currentStaff.position == 'Manager') {
-      position = 'Manager';
-    }
+    // if (staffProvider.currentStaff.position == 'Manager') {
+    //   position = 'Manager';
+    // }
     return Container(
       // height: 90,
       width: double.infinity,
@@ -34,7 +34,7 @@ class DiscountBanner extends StatelessWidget {
           children: [
             TextSpan(text: "A Summer Surpise\n"),
             TextSpan(
-              text: "${position}",
+              text: "Idi nahui",
               style: TextStyle(
                 fontSize: getProportionateScreenWidth(24),
                 fontWeight: FontWeight.bold,

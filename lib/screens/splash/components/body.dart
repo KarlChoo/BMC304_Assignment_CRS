@@ -29,7 +29,6 @@ class _BodyState extends State<Body> {
         staffProvider.getAllSystemStaff(),
       ]);
       print('Data loaded');
-      print(staffProvider.systemStaffs);
     }
     isInit = false;
     super.didChangeDependencies();
@@ -44,7 +43,7 @@ class _BodyState extends State<Body> {
       "image": "assets/images/splash_1.png"
     },
     {
-      "text": "We keep ourselves vigilant regarding disasters happening. \n We decide which of our volunteers"
+      "text": "We keep ourselves vigilant regarding disasters happening. We decide which of our volunteers"
       " is qualified for the job",
       "subtitle": "CRS Admin",
       "image": "assets/images/splash_2.png"

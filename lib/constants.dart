@@ -25,6 +25,7 @@ const defaultDuration = Duration(milliseconds: 250);
 // Form Error
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+const String kNoEmptyError = "This field can't be empty";
 const String kEmailNullError = "Please Enter your email";
 const String kUsernameNullError = "Please Enter your username";
 const String kInvalidEmailError = "Please Enter Valid Email";

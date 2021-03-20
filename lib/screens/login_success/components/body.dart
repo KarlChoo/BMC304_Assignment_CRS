@@ -1,11 +1,17 @@
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
+import 'package:bmc304_assignment_crs/screens/staff_home/staff_home.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/screens/home/home_screen.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
+import 'package:provider/provider.dart';
 
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    VolunteerProvider volunteerProvider = Provider.of<VolunteerProvider>(context);
     return Center(
       child: Column(
         children: [
@@ -29,7 +35,12 @@ class Body extends StatelessWidget {
             child: DefaultButton(
               text: "Go to Dashboard",
               press: () {
-                Navigator.pushNamed(context, HomeScreen.routeName);
+                //Navigator.pushNamed(context, HomeScreen.routeName);
+                if(staffProvider.currentStaff != null){
+                  Navigator.pushReplacementNamed(context, StaffHome.routeName);
+                }else if(volunteerProvider.currentVolunteer != null){
+                  Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                }
               },
             ),
           ),
