@@ -9,9 +9,6 @@ abstract class User with ChangeNotifier {
   final String email;
   final String phone;
   final String address;
-  final String firstName;
-  final String lastName;
-
   User({
     this.id,
     @required this.username,
@@ -21,7 +18,5 @@ abstract class User with ChangeNotifier {
     @required this.email,
     @required this.phone,
     @required this.address,
-    @required this.firstName,
-    @required this.lastName,
   });
 }

@@ -1,4 +1,4 @@
-import 'package:bmc304_assignment_crs/screens/profile/profile_screen.dart';
+import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/staff_home/staff_home.dart';
 import 'package:bmc304_assignment_crs/screens/staff_manage_admin/staff_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/staff_manage_staffs/staff_manage_managers.dart';

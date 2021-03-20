@@ -14,7 +14,7 @@ class StaffProvider extends ChangeNotifier {
   String paramUrl = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs/';
   Future<void> getAllSystemStaff() async{
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       if(response.statusCode != 200) print('getAllSystemStaff() method failed');
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Staff> loadingStaff = [];
@@ -152,7 +152,7 @@ class StaffProvider extends ChangeNotifier {
   Future<bool> updateStaff(Staff staff) async{
     try {
       String editUrl = "$paramUrl/${staff.id}.json";
-      final response = await http.patch(editUrl,
+      final response = await http.patch(Uri.parse(editUrl),
         body: json.encode({
           'username': staff.username,
           'password': staff.password,
@@ -186,7 +186,7 @@ class StaffProvider extends ChangeNotifier {
   Future<bool> suspendStaff(Staff staff) async {
     try {
       String editUrl = "$paramUrl/${staff.id}.json";
-      final response = await http.patch(editUrl,
+      final response = await http.patch(Uri.parse(editUrl),
          body: json.encode({
            "suspended" : !staff.suspended
          })
@@ -206,7 +206,7 @@ class StaffProvider extends ChangeNotifier {
   Future<bool> deleteStaff(String staffId) async {
     try {
       String deleteUrl = "$paramUrl/$staffId.json";
-      final response = await http.delete(deleteUrl);
+      final response = await http.delete(Uri.parse(deleteUrl));
       if(response.statusCode == 200) {
         systemStaffs.removeWhere((staff) => staff.id == staffId);
         notifyListeners();
