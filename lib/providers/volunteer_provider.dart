@@ -13,8 +13,8 @@ class VolunteerProvider with ChangeNotifier {
   List<Volunteer> volunteers = [];
   List<Staff> staffs = [];
 
-  String volunteerFileURL =
-      "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json";
+  Uri volunteerFileURL = Uri.parse(
+      "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json");
 
   Future<User> login(String username, String password) async {
     try {
@@ -31,6 +31,8 @@ class VolunteerProvider with ChangeNotifier {
               email: userdata['email'],
               phone: userdata['phone'],
               address: userdata['address'],
+              firstName: userdata['firstName'],
+              lastName: userdata['lastName'],
             );
             currentVolunteer = newVolunteer;
           }
@@ -71,11 +73,15 @@ class VolunteerProvider with ChangeNotifier {
           'email': volunteer.email,
           'phone': volunteer.phone,
           'address': volunteer.address,
+          'firstName': volunteer.firstName,
+          'lastName': volunteer.lastName,
         }));
     Volunteer newVolunteer = Volunteer(
       id: json.decode(
           response.body)['name'], //name is the database name for the data
       username: volunteer.username,
+      firstName: volunteer.firstName,
+      lastName: volunteer.lastName,
       password: volunteer.password,
       email: volunteer.email,
       phone: volunteer.phone,
@@ -93,8 +99,29 @@ class VolunteerProvider with ChangeNotifier {
     //   phone: '',
     //   email: '',
     //   address: '',
+    //   firstName: '',
+    //   lastName: '',
     // );
     currentVolunteer = null;
+  }
+
+  Future<void> updateVolunteerProfile(Volunteer volunteer) async {
+    Uri uri = Uri.parse(
+        "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers/${volunteer.id}.json");
+
+    try {
+      await http.patch(uri,
+          body: json.encode({
+            'firstName': volunteer.firstName,
+            'lastName': volunteer.lastName,
+            'phone': volunteer.phone,
+            'password': volunteer.password,
+          }));
+      currentVolunteer = volunteer;
+      notifyListeners();
+    } catch (error) {
+      print(error);
+    }
   }
 
 // Future<void> populateData() async{

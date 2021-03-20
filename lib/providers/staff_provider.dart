@@ -60,7 +60,7 @@ class StaffProvider extends ChangeNotifier {
     // 2 = account suspended
     int responseCode = 1;
     try {
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
 
       if(response.statusCode != 200) print('login() method failed');
 
@@ -103,8 +103,7 @@ class StaffProvider extends ChangeNotifier {
   Future<bool> isUserExist(String username) async {
     bool result = false;
     try {
-      //String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       if(response.statusCode != 200) print('isUserExist() method failed');
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
@@ -123,8 +122,7 @@ class StaffProvider extends ChangeNotifier {
 
   Future<bool> addStaff(Staff staff) async {
     try {
-      String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
-      final response = await http.post(url,
+      final response = await http.post(Uri.parse(url),
           body: json.encode({
             'username': staff.username,
             'password': staff.password,
@@ -221,15 +219,6 @@ class StaffProvider extends ChangeNotifier {
   }
 
   Future<void> signoutStaff() async {
-    // currentStaff = Staff(
-    //     username: '',
-    //     password: '',
-    //     phone: '',
-    //     email: '',
-    //     address: '',
-    //     position: '',
-    //     dateJoined: null
-    // );
     currentStaff = null;
   }
 }

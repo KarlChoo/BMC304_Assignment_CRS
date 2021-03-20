@@ -1,5 +1,5 @@
 import 'package:bmc304_assignment_crs/screens/home/home_screen.dart';
-import 'package:bmc304_assignment_crs/screens/profile/profile_screen.dart';
+import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -39,29 +39,23 @@ class CustomBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/Shop Icon.svg",
+                icon: Icon(
+                  Icons.home,
                   color: MenuState.home == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
+                  size: 30,
                 ),
                 onPressed: () => Navigator.pushReplacementNamed(
                     context, HomeScreen.routeName),
               ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Heart Icon.svg"),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: SvgPicture.asset("assets/icons/Chat bubble Icon.svg"),
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: SvgPicture.asset(
-                  "assets/icons/User Icon.svg",
+                icon: Icon(
+                  Icons.person_rounded,
                   color: MenuState.profile == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
+                  size: 30,
                 ),
                 onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
                     ProfileScreen.routeName, (Route<dynamic> route) => false),

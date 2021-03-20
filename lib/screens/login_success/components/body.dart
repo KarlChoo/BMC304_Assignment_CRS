@@ -12,7 +12,8 @@ class Body extends StatelessWidget {
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     VolunteerProvider volunteerProvider = Provider.of<VolunteerProvider>(context);
-    return Center(
+    return IntrinsicWidth(
+      stepWidth: double.infinity,
       child: Column(
         children: [
           SizedBox(height: SizeConfig.screenHeight * 0.04),

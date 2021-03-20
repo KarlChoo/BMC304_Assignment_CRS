@@ -1,5 +1,6 @@
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
+import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class Body extends StatelessWidget {
           ProfileMenu(
             text: "My Account",
             icon: "assets/icons/User Icon.svg",
-            press: () => {},
+            press: () => {Navigator.pushNamed(context, ProfilePage.routeName)},
           ),
           ProfileMenu(
             text: "Notifications",
