@@ -18,7 +18,7 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    final staffProvider = Provider.of<StaffProvider>(context);
     var staffList = staffProvider.getAllCRSAdmin();
 
     Future<bool> _onWillPop() async {

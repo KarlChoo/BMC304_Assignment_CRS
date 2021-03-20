@@ -1,6 +1,6 @@
 import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/screens/staff_edit_admin/staff_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_edit_admin/manager_edit_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -83,7 +83,7 @@ class AdminListCard extends StatelessWidget {
                     onSelected: (value) async{
                       switch(value) {
                         case "edit":
-                          Navigator.pushNamed(context, StaffEditAdmin.routeName, arguments: admin);
+                          Navigator.pushNamed(context, ManagerEditAdmin.routeName, arguments: admin);
                           break;
                         case "suspend":
                           final result = await staffProvider.suspendStaff(admin);

@@ -117,7 +117,6 @@ class _BodyState extends State<Body> {
                 text: "Edit Details",
                 press: () async{
                   KeyboardUtil.hideKeyboard(context);
-
                   if(_formKey.currentState.validate()){
                     _formKey.currentState.save();
 

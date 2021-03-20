@@ -1,4 +1,4 @@
-import 'package:bmc304_assignment_crs/screens/staff_add_admin/staff_add_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_add_admin/manager_add_admin.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -10,7 +10,7 @@ class RegisterFloatingButton extends StatelessWidget {
       child: Icon(Icons.add,size: 28,),
       backgroundColor: kPrimaryColor,
       onPressed: () {
-        Navigator.pushNamed(context, StaffAddAdmin.routeName);
+        Navigator.pushNamed(context, ManagerAddAdmin.routeName);
       },
     );
   }

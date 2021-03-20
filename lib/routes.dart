@@ -1,8 +1,8 @@
-import 'package:bmc304_assignment_crs/screens/staff_add_admin/staff_add_admin.dart';
-import 'package:bmc304_assignment_crs/screens/staff_edit_admin/staff_edit_admin.dart';
-import 'package:bmc304_assignment_crs/screens/staff_home/staff_home.dart';
-import 'package:bmc304_assignment_crs/screens/staff_manage_admin/staff_manage_admin.dart';
-import 'package:bmc304_assignment_crs/screens/staff_manage_staffs/staff_manage_managers.dart';
+import 'package:bmc304_assignment_crs/screens/manager_add_admin/manager_add_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_edit_admin/manager_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
+import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
 import 'package:bmc304_assignment_crs/screens/edit_profile/edit_profile_page.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
@@ -33,11 +33,11 @@ final Map<String, WidgetBuilder> routes = {
   DetailsScreen.routeName: (context) => DetailsScreen(),
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
-  StaffHome.routeName: (context) => StaffHome(),
-  StaffManageAdmin.routeName: (context) => StaffManageAdmin(),
-  StaffManageManagers.routeName: (context) => StaffManageManagers(),
-  StaffAddAdmin.routeName: (context) => StaffAddAdmin(),
-  StaffEditAdmin.routeName : (context) => StaffEditAdmin(),
+  ManagerHome.routeName: (context) => ManagerHome(),
+  ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
+  ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
+  ManagerAddAdmin.routeName: (context) => ManagerAddAdmin(),
+  ManagerEditAdmin.routeName : (context) => ManagerEditAdmin(),
   ProfilePage.routeName: (context) => ProfilePage(),
   EditProfilePage.routeName: (context) => EditProfilePage(),
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),

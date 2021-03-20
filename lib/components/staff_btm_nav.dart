@@ -1,7 +1,7 @@
+import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
-import 'package:bmc304_assignment_crs/screens/staff_home/staff_home.dart';
-import 'package:bmc304_assignment_crs/screens/staff_manage_admin/staff_manage_admin.dart';
-import 'package:bmc304_assignment_crs/screens/staff_manage_staffs/staff_manage_managers.dart';
+import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -46,7 +46,7 @@ class StaffBottomNav extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if(this.selectedMenu != StaffMenuState.home)
-                      Navigator.pushReplacementNamed(context, StaffHome.routeName);
+                      Navigator.pushReplacementNamed(context, ManagerHome.routeName);
                   },
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +74,7 @@ class StaffBottomNav extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if(this.selectedMenu != StaffMenuState.admin)
-                      Navigator.pushNamedAndRemoveUntil(context, StaffManageAdmin.routeName, ModalRoute.withName('/sign_in'));
+                      Navigator.pushNamedAndRemoveUntil(context, ManagerManageAdmin.routeName, ModalRoute.withName('/sign_in'));
                       //Navigator.pushReplacementNamed(context, StaffManageAdmin.routeName);
                   },
                   child: Column(
@@ -103,7 +103,7 @@ class StaffBottomNav extends StatelessWidget {
                 child: GestureDetector(
                   onTap: () {
                     if(this.selectedMenu != StaffMenuState.staff)
-                      Navigator.pushNamedAndRemoveUntil(context, StaffManageManagers.routeName, ModalRoute.withName('/sign_in'));
+                      Navigator.pushNamedAndRemoveUntil(context, ManagerManageStaff.routeName, ModalRoute.withName('/sign_in'));
                       //Navigator.pushReplacementNamed(context,  StaffManageStaffs.routeName);
                   },
                   child: Column(

@@ -208,6 +208,7 @@ class StaffProvider extends ChangeNotifier {
       String deleteUrl = "$paramUrl/$staffId.json";
       final response = await http.delete(Uri.parse(deleteUrl));
       if(response.statusCode == 200) {
+        print('Test');
         systemStaffs.removeWhere((staff) => staff.id == staffId);
         notifyListeners();
         return true;
