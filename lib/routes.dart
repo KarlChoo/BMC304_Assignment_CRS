@@ -7,7 +7,6 @@ import 'package:bmc304_assignment_crs/screens/edit_profile/edit_profile_page.dar
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
-import 'package:bmc304_assignment_crs/screens/update_document/update_document_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/update_document_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/upload_images_page.dart';
@@ -47,6 +46,5 @@ final Map<String, WidgetBuilder> routes = {
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
   TripReport.routeName: (context) => TripReport(),
   VolunteerReport.routeName: (context) => VolunteerReport(),
-  UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
-  UploadImagePage.routeName: (context) => UploadImagePage(),  
+  UploadImagePage.routeName: (context) => UploadImagePage(),
 };

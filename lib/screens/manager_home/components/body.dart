@@ -81,7 +81,7 @@ class _BodyState extends State<Body> {
                         radius: 55,
                         backgroundColor: Colors.black,
                         backgroundImage:
-                            AssetImage("assets/images/Profile Image.png"),
+                            AssetImage("assets/images/profile-icon-png-910.png"),
                       ),
                     ),
                     Text(

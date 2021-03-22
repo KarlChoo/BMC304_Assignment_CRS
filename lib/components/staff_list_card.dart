@@ -24,7 +24,7 @@ class StaffListCard extends StatelessWidget {
                 CircleAvatar(
                   radius: 20,
                   backgroundColor: Colors.black,
-                  backgroundImage: AssetImage("assets/images/Profile Image.png"),
+                  backgroundImage: AssetImage("assets/images/profile-icon-png-910.png"),
                 ),
                 SizedBox(width: getProportionateScreenWidth(10),),
                 Expanded(
