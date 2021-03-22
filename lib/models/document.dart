@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 class Document with ChangeNotifier {
   final String id;
   final String documentType;
-  final int expireDate;
-  final Image documentImage;
+  final String expiryDate;
+  final String documentImage;
   final String volunteerId;
+  final String certName;
+  final String visaCountry;
 
   Document({
     this.id,
     @required this.documentType,
-    @required this.expireDate,
+    this.expiryDate,
     @required this.documentImage,
-    @required this.volunteerId
+    @required this.volunteerId,
+    this.certName,
+    this.visaCountry,
   });
 }

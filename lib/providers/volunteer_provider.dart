@@ -2,16 +2,19 @@ import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/models/user.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
 import 'package:flutter/material.dart';
+import 'package:bmc304_assignment_crs/models/document.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class VolunteerProvider with ChangeNotifier {
   Volunteer currentVolunteer;
   List<Volunteer> _systemVolunteers = [];
+  List<Document> _documentList = [];
   List<Volunteer> get systemVolunteers => _systemVolunteers;
 
-  List<Volunteer> volunteers = [];
-  List<Staff> staffs = [];
+  List<Document> get documentList {
+    return [..._documentList];
+  }
 
   Uri volunteerFileURL = Uri.parse(
       "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json");
@@ -39,6 +42,34 @@ class VolunteerProvider with ChangeNotifier {
         });
       }
       return currentVolunteer; //if there is no match (username and password), this method return null
+    } catch (error) {
+      print(error);
+      return null;
+    }
+  }
+
+  Future<void> getAllDocument(String id) async {
+    try {
+      Uri volunteerDocument = Uri.parse(
+          "https://bmc304-67ba7-default-rtdb.firebaseio.com/documents.json");
+      final response = await http.get(volunteerDocument);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData != null && extractedData.length > 0) {
+        extractedData.forEach((documentId, documentData) {
+          Document newDocument = Document(
+            id: documentId,
+            documentType: documentData['documentType'],
+            documentImage: documentData['documentImage'],
+            volunteerId: documentData['volunteerId'],
+            certName: documentData['certName'],
+            visaCountry: documentData['visaCountry'],
+            expiryDate: documentData['expiryDate'],
+          );
+          if (newDocument.volunteerId == id) {
+            _documentList.add(newDocument);
+          }
+        });
+      }
     } catch (error) {
       print(error);
       return null;
@@ -90,6 +121,66 @@ class VolunteerProvider with ChangeNotifier {
     currentVolunteer = newVolunteer;
     notifyListeners();
     return currentVolunteer;
+  }
+
+  Future<void> addDocument(Document document) async {
+    Uri volunteerDocument = Uri.parse(
+        "https://bmc304-67ba7-default-rtdb.firebaseio.com/documents.json");
+    if (document.documentType == 'Certificate') {
+      final response = await http.post(volunteerDocument,
+          body: json.encode({
+            'documentType': document.documentType,
+            'documentImage': document.documentImage,
+            'volunteerId': document.volunteerId,
+            'certName': document.certName,
+            'expiryDate': document.expiryDate,
+          }));
+      Document newDocument = Document(
+        id: json.decode(response.body)['name'],
+        documentImage: document.documentImage,
+        documentType: document.documentType,
+        certName: document.certName,
+        volunteerId: document.volunteerId,
+      );
+      _documentList.add(newDocument);
+    } else if (document.documentType == 'Visa') {
+      final response = await http.post(volunteerDocument,
+          body: json.encode({
+            'documentType': document.documentType,
+            'documentImage': document.documentImage,
+            'expiryDate': document.expiryDate,
+            'volunteerId': document.volunteerId,
+            'visaCountry': document.visaCountry,
+          }));
+      Document newDocument = Document(
+        id: json.decode(response.body)['name'],
+        //name is the database name for the data
+        documentImage: document.documentImage,
+        documentType: document.documentType,
+        expiryDate: document.expiryDate,
+        visaCountry: document.visaCountry,
+        volunteerId: document.volunteerId,
+      );
+      _documentList.add(newDocument);
+    } else {
+      final response = await http.post(volunteerDocument,
+          body: json.encode({
+            'documentType': document.documentType,
+            'documentImage': document.documentImage,
+            'expiryDate': document.expiryDate,
+            'volunteerId': document.volunteerId,
+          }));
+      Document newDocument = Document(
+        id: json.decode(response.body)['name'],
+        //name is the database name for the data
+        documentImage: document.documentImage,
+        documentType: document.documentType,
+        expiryDate: document.expiryDate,
+        volunteerId: document.volunteerId,
+      );
+      _documentList.add(newDocument);
+    }
+    notifyListeners();
   }
 
   Future<void> signoutVolunteer() async {

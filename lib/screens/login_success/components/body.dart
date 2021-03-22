@@ -3,7 +3,7 @@ import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
-import 'package:bmc304_assignment_crs/screens/home/home_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
 import 'package:provider/provider.dart';
 
@@ -15,22 +15,23 @@ class Body extends StatelessWidget {
 
     Future<bool> _onWillPop() async {
       return (await showDialog(
-        context: context,
-        builder: (context) => new AlertDialog(
-          title: new Text('Are you sure?'),
-          content: new Text('Do you want to exit close the application?'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(false),
-              child: Text('No'),
+            context: context,
+            builder: (context) => new AlertDialog(
+              title: new Text('Are you sure?'),
+              content: new Text('Do you want to exit close the application?'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(false),
+                  child: Text('No'),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(true),
+                  child: Text('Yes'),
+                ),
+              ],
             ),
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Yes'),
-            ),
-          ],
-        ),
-      )) ?? false;
+          )) ??
+          false;
     }
 
     return WillPopScope(
@@ -60,10 +61,12 @@ class Body extends StatelessWidget {
                 text: "Go to Dashboard",
                 press: () {
                   //Navigator.pushNamed(context, HomeScreen.routeName);
-                  if(staffProvider.currentStaff != null){
-                    Navigator.pushReplacementNamed(context, ManagerHome.routeName);
-                  }else if(volunteerProvider.currentVolunteer != null){
-                    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+                  if (staffProvider.currentStaff != null) {
+                    Navigator.pushReplacementNamed(
+                        context, ManagerHome.routeName);
+                  } else if (volunteerProvider.currentVolunteer != null) {
+                    Navigator.pushReplacementNamed(
+                        context, HomeScreen.routeName);
                   }
                 },
               ),
