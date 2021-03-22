@@ -44,6 +44,7 @@ class StaffProvider extends ChangeNotifier {
     }
   }
 
+
   List<Staff> getAllCRSAdmin() {
     final List<Staff> adminList = [];
 
@@ -52,6 +53,22 @@ class StaffProvider extends ChangeNotifier {
         adminList.add(staff);
     });
     return adminList;
+  }
+
+  List<Staff> getAllCRSManager() {
+    final List<Staff> managerList = [];
+
+    systemStaffs.forEach((staff) {
+      if(staff.position == "Manager" || staff.position == "Director")
+        managerList.add(staff);
+    });
+    return managerList;
+  }
+
+  void updateOwnDetails() {
+    systemStaffs.forEach((staff) {
+      if(staff.id == currentStaff.id) currentStaff = staff;
+    });
   }
 
   Future<int> login(String username, String password) async {

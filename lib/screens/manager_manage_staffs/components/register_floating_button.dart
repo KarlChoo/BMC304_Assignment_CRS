@@ -14,7 +14,7 @@ class RegisterFloatingButton extends StatelessWidget {
       backgroundColor: kPrimaryColor,
       onPressed: () {
         Navigator.pushNamed(context, ManagerAddStaff.routeName,
-            arguments: "Admin");
+            arguments: "Manager");
       },
     );
   }

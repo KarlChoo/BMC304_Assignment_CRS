@@ -5,11 +5,14 @@ import '../../components/staff_btm_nav.dart';
 
 class ManagerHome extends StatelessWidget {
   static String routeName = "/manager_home";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Body(),
-      bottomNavigationBar: StaffBottomNav(selectedMenu: StaffMenuState.home,),
+      bottomNavigationBar: StaffBottomNav(
+        selectedMenu: StaffMenuState.home,
+      ),
     );
   }
 }

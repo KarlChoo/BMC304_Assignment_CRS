@@ -1,8 +1,9 @@
-import 'package:bmc304_assignment_crs/screens/manager_edit_admin/components/body.dart';
+import 'package:bmc304_assignment_crs/screens/manager_edit_staff/components/body.dart';
 import 'package:flutter/material.dart';
 
-class ManagerEditAdmin extends StatelessWidget {
-  static String routeName = "/manager_edit_admin";
+class ManagerEditStaff extends StatelessWidget {
+  static String routeName = "/manager_edit_staff";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

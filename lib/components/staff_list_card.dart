@@ -1,16 +1,16 @@
 import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/screens/manager_edit_admin/manager_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../size_config.dart';
+import '../size_config.dart';
 
-class AdminListCard extends StatelessWidget {
+class StaffListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final staffProvider = Provider.of<StaffProvider>(context);
-    final admin = Provider.of<Staff>(context);
+    final staff = Provider.of<Staff>(context);
     return Card(
       color: Colors.white,
       shadowColor: Colors.grey,
@@ -30,7 +30,7 @@ class AdminListCard extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: Text(
-                    "${admin.firstName} ${admin.lastName}",
+                    "${staff.firstName} ${staff.lastName}",
                     style: TextStyle(
                         fontSize: 16,
                         color: Colors.black,
@@ -62,7 +62,7 @@ class AdminListCard extends StatelessWidget {
                           children: [
                             Icon(Icons.stop_circle_outlined),
                             Spacer(),
-                            Text(admin.suspended ? "Unban" : "Suspend")
+                            Text(staff.suspended ? "Unban" : "Suspend")
                           ],
                         ),
                         value: "suspend",
@@ -81,22 +81,39 @@ class AdminListCard extends StatelessWidget {
                       ),
                     ],
                     onSelected: (value) async{
+                      print('value');
+                      if(staff.position == "Director") {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                "Director account cannot be modified by a manager",
+                              ),
+                              duration: Duration(seconds: 2),
+                              action: SnackBarAction(
+                                label: "Ok",
+                                onPressed: () {  },
+                              ),
+                              behavior: SnackBarBehavior.fixed,
+                            )
+                        );
+                        return;
+                      }
                       switch(value) {
                         case "edit":
-                          Navigator.pushNamed(context, ManagerEditAdmin.routeName, arguments: admin);
+                          Navigator.pushNamed(context, ManagerEditStaff.routeName, arguments: staff);
                           break;
                         case "suspend":
-                          final result = await staffProvider.suspendStaff(admin);
+                          final result = await staffProvider.suspendStaff(staff);
 
                           String snackBarMsg = "";
                           if(result) {
-                            if(admin.suspended)
-                              snackBarMsg = "Admin ${admin.firstName} ${admin.lastName} has been suspended";
+                            if(staff.suspended)
+                              snackBarMsg = "User ${staff.firstName} ${staff.lastName} has been suspended";
                             else
-                              snackBarMsg = "Admin ${admin.firstName} ${admin.lastName} has been unbanned";
+                              snackBarMsg = "User ${staff.firstName} ${staff.lastName} has been unbanned";
                           }
                           else {
-                            if(admin.suspended)
+                            if(staff.suspended)
                               snackBarMsg = "Unban of staff failed due to backend error";
                             else
                               snackBarMsg = "Suspension of staff failed due to backend error";
@@ -117,10 +134,10 @@ class AdminListCard extends StatelessWidget {
                           );
                           break;
                         case "delete":
-                          final result = await staffProvider.deleteStaff(admin.id);
+                          final result = await staffProvider.deleteStaff(staff.id);
 
                           String snackBarMsg = "";
-                          if(result) snackBarMsg = "Admin ${admin.firstName} ${admin.lastName} has been deleted";
+                          if(result) snackBarMsg = "User ${staff.firstName} ${staff.lastName} has been deleted";
                           else snackBarMsg = "Deletion of staff failed due to backend error";
 
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -149,7 +166,7 @@ class AdminListCard extends StatelessWidget {
                 SizedBox(width: getProportionateScreenWidth(5),),
                 Expanded(
                   flex: 1,
-                  child: Text(admin.username,
+                  child: Text(staff.username,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
@@ -161,9 +178,9 @@ class AdminListCard extends StatelessWidget {
                     flex: 1,
                     child: Chip(
                       padding: EdgeInsets.zero,
-                      backgroundColor: admin.suspended ? Colors.red : Colors.green,
+                      backgroundColor: staff.suspended ? Colors.red : Colors.green,
                       label: Text(
-                        admin.suspended ? "Suspended" : "Operational",
+                        staff.suspended ? "Suspended" : "Operational",
                         style: TextStyle(fontSize: 10),
                       ),
                     )
@@ -177,7 +194,7 @@ class AdminListCard extends StatelessWidget {
                 Icon(Icons.phone,color: Colors.grey,size: 14),
                 SizedBox(width: getProportionateScreenWidth(5),),
                 Expanded(
-                  child: Text(admin.phone,
+                  child: Text(staff.phone,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,
@@ -192,7 +209,7 @@ class AdminListCard extends StatelessWidget {
                 Icon(Icons.email,color: Colors.grey,size: 14,),
                 SizedBox(width: getProportionateScreenWidth(5),),
                 Expanded(
-                  child: Text(admin.email,
+                  child: Text(staff.email,
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

@@ -1,12 +1,14 @@
-import 'package:bmc304_assignment_crs/screens/manager_add_admin/manager_add_admin.dart';
-import 'package:bmc304_assignment_crs/screens/manager_edit_admin/manager_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/manager_add_staff/manager_add_staff.dart';
+import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
 import 'package:bmc304_assignment_crs/screens/edit_profile/edit_profile_page.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
+import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
 import 'package:bmc304_assignment_crs/screens/update_document/update_document_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bmc304_assignment_crs/screens/cart/cart_screen.dart';
 import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_screen.dart';
@@ -36,9 +38,12 @@ final Map<String, WidgetBuilder> routes = {
   ManagerHome.routeName: (context) => ManagerHome(),
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
-  ManagerAddAdmin.routeName: (context) => ManagerAddAdmin(),
-  ManagerEditAdmin.routeName : (context) => ManagerEditAdmin(),
+  ManagerAddStaff.routeName: (context) => ManagerAddStaff(),
+  ManagerEditStaff.routeName : (context) => ManagerEditStaff(),
   ProfilePage.routeName: (context) => ProfilePage(),
   EditProfilePage.routeName: (context) => EditProfilePage(),
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
+  TripReport.routeName: (context) => TripReport(),
+  VolunteerReport.routeName: (context) => VolunteerReport(),
+
 };
