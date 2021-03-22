@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Application with ChangeNotifier {
   final String applicationId;
-  final String applicationDate;
+  final int applicationDate;
   final String status;
   final String remarks;
 

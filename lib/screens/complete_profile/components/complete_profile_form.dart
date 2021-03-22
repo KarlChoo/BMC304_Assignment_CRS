@@ -162,13 +162,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       controller: lastNameController,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNameNullError);
+          removeError(error: kNamelNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNameNullError);
+          addError(error: kNamelNullError);
           return "";
         }
         return null;
@@ -190,13 +190,13 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       controller: firstNameController,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNameNullError);
+          removeError(error: kNamelNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNameNullError);
+          addError(error: kNamelNullError);
           return "";
         }
         return null;

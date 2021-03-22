@@ -213,13 +213,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       controller: lastNameController,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNameNullError);
+          removeError(error: kNamelNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNameNullError);
+          addError(error: kNamelNullError);
           return "";
         }
         return null;
@@ -241,13 +241,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
       controller: firstNameController,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kNameNullError);
+          removeError(error: kNamelNullError);
         }
         return null;
       },
       validator: (value) {
         if (value.isEmpty) {
-          addError(error: kNameNullError);
+          addError(error: kNamelNullError);
           return "";
         }
         return null;

@@ -195,6 +195,43 @@ class StaffBottomNav extends StatelessWidget {
                   ),
                 ),
               ),
+              // IconButton(
+              //   icon: SvgPicture.asset(
+              //     "assets/icons/Shop Icon.svg",
+              //     color: StaffMenuState.home == selectedMenu
+              //         ? kPrimaryColor
+              //         : inActiveIconColor,
+              //   ),
+              //   onPressed: () {
+              //     if(this.selectedMenu != StaffMenuState.home)
+              //       Navigator.pushReplacementNamed(context, StaffHome.routeName);
+              //   },
+              //   padding: EdgeInsets.zero,
+              // ),
+              // IconButton(
+              //   icon: SvgPicture.asset("assets/icons/staff_card.svg",
+              //     color: StaffMenuState.admin == selectedMenu
+              //     ? kPrimaryColor
+              //         : inActiveIconColor,
+              //   ),
+              //   onPressed: () {
+              //     if(this.selectedMenu != StaffMenuState.admin)
+              //       Navigator.pushNamed(context, StaffManageAdmin.routeName);
+              //   },
+              // ),
+              // IconButton(
+              //   icon: SvgPicture.asset(
+              //     "assets/icons/User Icon.svg",
+              //     color: StaffMenuState.profile == selectedMenu
+              //         ? kPrimaryColor
+              //         : inActiveIconColor,
+              //   ),
+              //   onPressed: () {
+              //     // Navigator.pushNamedAndRemoveUntil(context,
+              //     //     ProfileScreen.routeName, (Route<dynamic> route) => false);
+              //     Navigator.pushNamed(context, ProfileScreen.routeName);
+              //   },
+              // ),
             ],
           )),
     );
