@@ -1,3 +1,4 @@
+import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/models/user.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
@@ -10,14 +11,22 @@ class VolunteerProvider with ChangeNotifier {
   Volunteer currentVolunteer;
   List<Volunteer> _systemVolunteers = [];
   List<Document> _documentList = [];
+  List<Application> _applicationList = [];
   List<Volunteer> get systemVolunteers => _systemVolunteers;
 
   List<Document> get documentList {
     return [..._documentList];
   }
 
+  List<Application> get applicationList {
+    return [..._applicationList];
+  }
+
   Uri volunteerFileURL = Uri.parse(
       "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers.json");
+
+  Uri volunteerApplication = Uri.parse(
+      "https://bmc304-67ba7-default-rtdb.firebaseio.com/applications.json");
 
   Future<User> login(String username, String password) async {
     try {
@@ -76,6 +85,32 @@ class VolunteerProvider with ChangeNotifier {
     }
   }
 
+  Future<void> getAllApplication(String volunteerId) async {
+    try {
+      final response = await http.get(volunteerApplication);
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      if (extractedData != null && extractedData.length > 0) {
+        extractedData.forEach((applicationId, applicationData) {
+          Application newApplication = Application(
+            applicationId: applicationId,
+            applicationDate: applicationData['applicationDate'],
+            status: applicationData['status'],
+            volunteerId: applicationData['volunteerId'],
+            remarks: applicationData['remarks'],
+            tripId: applicationData['tripId'],
+            staffId: applicationData['staffId'],
+          );
+          if (newApplication.volunteerId == volunteerId) {
+            _applicationList.add(newApplication);
+          }
+        });
+      }
+    } catch (error) {
+      print(error);
+      return null;
+    }
+  }
+
   //Needs to be cross checked with the array in staff array through provider
   Future<bool> isVolunteerExist(String username) async {
     bool result = false;
@@ -121,6 +156,30 @@ class VolunteerProvider with ChangeNotifier {
     currentVolunteer = newVolunteer;
     notifyListeners();
     return currentVolunteer;
+  }
+
+  Future<void> addApplication(Application application) async {
+    final response = await http.post(volunteerApplication,
+        body: json.encode({
+          'applicationDate': application.applicationDate,
+          'status': application.status,
+          'remarks': application.remarks,
+          'tripId': application.tripId,
+          'volunteerId': application.volunteerId,
+          'staffId': application.staffId,
+        }));
+    Application newApplication = Application(
+      applicationId: json.decode(
+          response.body)['name'], //name is the database name for the data
+      applicationDate: application.applicationDate,
+      status: application.status,
+      remarks: application.remarks,
+      tripId: application.tripId,
+      volunteerId: application.volunteerId,
+      staffId: application.staffId,
+    );
+    _applicationList.add(newApplication);
+    notifyListeners();
   }
 
   Future<void> addDocument(Document document) async {
@@ -213,6 +272,10 @@ class VolunteerProvider with ChangeNotifier {
     } catch (error) {
       print(error);
     }
+  }
+
+  Future<void> clearApplicationList() {
+    _applicationList = [];
   }
 
 // Future<void> populateData() async{
