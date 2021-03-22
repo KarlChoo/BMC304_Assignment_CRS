@@ -42,3 +42,4 @@ app.*.map.json
 pubspec.lock
 
 *.zip
+lib/hierachy.txt

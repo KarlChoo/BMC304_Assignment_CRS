@@ -7,7 +7,8 @@ class Staff extends User {
   bool suspended;
   final int dateJoined;
 
-  final List<Trip> organizedTrips = [];
+  //Trips are stored in id
+  final List<String> organizedTrips = [];
 
   Staff(
       {String id,
