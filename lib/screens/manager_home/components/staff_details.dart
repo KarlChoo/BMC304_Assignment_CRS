@@ -123,7 +123,7 @@ class _StaffDetailsState extends State<StaffDetails> {
                   [dd, " ", MM, " ", yyyy]),
               style: kStaffDetailText,
               overflow: TextOverflow.visible,
-            )
+            ),
           ],
         ),
       ],
