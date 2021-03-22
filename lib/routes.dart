@@ -9,12 +9,14 @@ import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
 import 'package:bmc304_assignment_crs/screens/update_document/update_document_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_update_document/update_document_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_update_document/upload_images_page.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bmc304_assignment_crs/screens/cart/cart_screen.dart';
 import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/details/details_screen.dart';
 import 'package:bmc304_assignment_crs/screens/forgot_password/forgot_password_screen.dart';
-import 'package:bmc304_assignment_crs/screens/home/home_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:bmc304_assignment_crs/screens/login_success/login_success_screen.dart';
 import 'package:bmc304_assignment_crs/screens/otp/otp_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
@@ -45,5 +47,6 @@ final Map<String, WidgetBuilder> routes = {
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
   TripReport.routeName: (context) => TripReport(),
   VolunteerReport.routeName: (context) => VolunteerReport(),
-
+  UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
+  UploadImagePage.routeName: (context) => UploadImagePage(),  
 };

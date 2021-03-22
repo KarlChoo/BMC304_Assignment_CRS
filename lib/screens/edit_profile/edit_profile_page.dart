@@ -1,7 +1,7 @@
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
-import 'package:bmc304_assignment_crs/screens/home/home_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

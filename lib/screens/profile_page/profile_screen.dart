@@ -1,6 +1,6 @@
 import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/screens/edit_profile/edit_profile_page.dart';
-import 'package:bmc304_assignment_crs/screens/update_document/update_document_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_update_document/update_document_page.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {
