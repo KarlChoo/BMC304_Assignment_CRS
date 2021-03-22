@@ -1,7 +1,10 @@
+import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_trips_application/trips_application_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +17,10 @@ class Body extends StatelessWidget {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
+    if (volunteerProvider.applicationList.length == 0) {
+      volunteerProvider
+          .getAllApplication(volunteerProvider.currentVolunteer.id);
+    }
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -26,14 +33,18 @@ class Body extends StatelessWidget {
             press: () => {Navigator.pushNamed(context, ProfilePage.routeName)},
           ),
           ProfileMenu(
-            text: "Notifications",
+            text: "Apply Trips",
             icon: "assets/icons/Bell.svg",
-            press: () {},
+            press: () {
+              Navigator.pushNamed(context, TripsApplication.routeName);
+            },
           ),
           ProfileMenu(
-            text: "Settings",
+            text: "Application Status",
             icon: "assets/icons/Settings.svg",
-            press: () {},
+            press: () {
+              Navigator.pushNamed(context, ApplicationStatus.routeName);
+            },
           ),
           ProfileMenu(
             text: "Help Center",

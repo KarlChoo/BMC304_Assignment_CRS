@@ -3,11 +3,13 @@ import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_ad
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
-import 'package:bmc304_assignment_crs/screens/edit_profile/edit_profile_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_edit_profile/edit_profile_page.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_trips_application/trips_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/update_document_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/upload_images_page.dart';
 import 'package:flutter/widgets.dart';
@@ -40,11 +42,13 @@ final Map<String, WidgetBuilder> routes = {
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
   ManagerAddStaff.routeName: (context) => ManagerAddStaff(),
-  ManagerEditStaff.routeName : (context) => ManagerEditStaff(),
+  ManagerEditStaff.routeName: (context) => ManagerEditStaff(),
   ProfilePage.routeName: (context) => ProfilePage(),
   EditProfilePage.routeName: (context) => EditProfilePage(),
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),
   TripReport.routeName: (context) => TripReport(),
   VolunteerReport.routeName: (context) => VolunteerReport(),
   UploadImagePage.routeName: (context) => UploadImagePage(),
+  TripsApplication.routeName: (context) => TripsApplication(),
+  ApplicationStatus.routeName: (context) => ApplicationStatus(),
 };

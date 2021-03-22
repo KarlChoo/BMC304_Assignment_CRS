@@ -1,17 +1,18 @@
 import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:flutter/material.dart';
 
-class Trip with ChangeNotifier{
+class Trip with ChangeNotifier {
   final String tripId;
   final String description;
   final String tripDate;
   final String location;
   final String crisisType;
   final int numVolunteers;
+  final String remark;
 
   final String staffId;
   final List<Application> applicationList = [];
-  
+
   Trip({
     this.tripId,
     @required this.description,
@@ -19,6 +20,7 @@ class Trip with ChangeNotifier{
     @required this.location,
     @required this.crisisType,
     @required this.numVolunteers,
-    @required this.staffId
+    @required this.staffId,
+    this.remark,
   });
 }
