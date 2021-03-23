@@ -99,6 +99,7 @@ class VolunteerProvider with ChangeNotifier {
             remarks: applicationData['remarks'],
             tripId: applicationData['tripId'],
             staffId: applicationData['staffId'],
+            tripDate: applicationData['tripDate'],
           );
           if (newApplication.volunteerId == volunteerId) {
             _applicationList.add(newApplication);
@@ -167,6 +168,7 @@ class VolunteerProvider with ChangeNotifier {
           'tripId': application.tripId,
           'volunteerId': application.volunteerId,
           'staffId': application.staffId,
+          'tripDate': application.tripDate,
         }));
     Application newApplication = Application(
       applicationId: json.decode(
@@ -177,6 +179,7 @@ class VolunteerProvider with ChangeNotifier {
       tripId: application.tripId,
       volunteerId: application.volunteerId,
       staffId: application.staffId,
+      tripDate: application.tripDate,
     );
     _applicationList.add(newApplication);
     notifyListeners();

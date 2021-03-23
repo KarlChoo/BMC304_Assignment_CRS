@@ -5,7 +5,7 @@ class Application with ChangeNotifier {
   final String applicationDate;
   final String status;
   final String remarks;
-
+  final String tripDate;
   final String tripId;
   final String volunteerId;
   final String staffId;
@@ -17,5 +17,6 @@ class Application with ChangeNotifier {
       @required this.status,
       @required this.tripId,
       @required this.volunteerId,
+      @required this.tripDate,
       @required this.staffId});
 }

@@ -10,18 +10,9 @@ class ApplicationStatus extends StatefulWidget {
 
 class _ApplicationStatusState extends State<ApplicationStatus> {
   @override
-  void didChangeDependencies() async {
-    VolunteerProvider volunteerProvider =
-        Provider.of<VolunteerProvider>(context);
-
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
-
     return Scaffold(
         appBar: AppBar(
           title: Text('Application Status'),
@@ -31,7 +22,12 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
-                child: Text(volunteerProvider.applicationList[index].status),
+                child: Column(
+                  children: [
+                    Text(volunteerProvider.applicationList[index].status),
+                    Text(volunteerProvider.applicationList[index].tripDate),
+                  ],
+                ),
               ),
             );
           },

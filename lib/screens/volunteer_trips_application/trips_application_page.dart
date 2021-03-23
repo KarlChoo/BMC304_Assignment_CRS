@@ -7,6 +7,9 @@ import 'package:provider/provider.dart';
 
 class TripsApplication extends StatefulWidget {
   static const routeName = '/Trips_application';
+  final List<Trip> tempList;
+
+  TripsApplication({this.tempList});
   @override
   _TripsApplicationState createState() => _TripsApplicationState();
 }
@@ -35,81 +38,68 @@ class _TripsApplicationState extends State<TripsApplication> {
   }
 
   @override
-  void didChangeDependencies() {
-    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
-    VolunteerProvider volunteerProvider =
-        Provider.of<VolunteerProvider>(context);
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    setState(() {
-      staffProvider.getAllTrips();
-      volunteerProvider
-          .getAllApplication(volunteerProvider.currentVolunteer.id);
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
-    tempList = staffProvider.staffsTrip;
-    if (tempList.length > 0) {
-      for (int i = 0; i < volunteerProvider.applicationList.length; i++) {
-        for (int j = 0; j < tempList.length; j++) {
-          tempList.removeWhere((element) =>
-              element.tripId == volunteerProvider.applicationList[i].tripId);
-        }
-      }
-    }
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Trips Application'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8, bottom: 8),
-                  child: ListTile(
-                    leading: crisisIcons(tempList[index].crisisType),
-                    title: Text(
-                      '${tempList[index].crisisType}',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                    subtitle: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Column(
-                        children: [
-                          Text(
-                              'Required Volunteer: ${tempList[index].numVolunteers}'),
-                          Text('Country: ${tempList[index].location}'),
-                        ],
+    if (widget.tempList.length != 0) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Trips Application'),
+        ),
+        body: Column(
+          children: [
+            Expanded(
+              child: ListView.builder(
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 8),
+                    child: ListTile(
+                      leading: crisisIcons(widget.tempList[index].crisisType),
+                      title: Text(
+                        '${widget.tempList[index].crisisType}',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    trailing: ElevatedButton(
-                      child: Text('Apply'),
-                      onPressed: () async {
-                        Application newApplication = Application(
+                      subtitle: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Column(
+                          children: [
+                            Text(
+                                'Required Volunteer: ${widget.tempList[index].numVolunteers}'),
+                            Text('Country: ${widget.tempList[index].location}'),
+                          ],
+                        ),
+                      ),
+                      trailing: ElevatedButton(
+                        child: Text('Apply'),
+                        onPressed: () async {
+                          Application newApplication = Application(
                             applicationDate: DateTime.now().toString(),
                             status: 'New',
                             tripId: staffProvider.staffsTrip[index].tripId,
                             volunteerId: volunteerProvider.currentVolunteer.id,
-                            staffId: staffProvider.staffsTrip[index].staffId);
-                        volunteerProvider.addApplication(newApplication);
-                      },
+                            staffId: staffProvider.staffsTrip[index].staffId,
+                            tripDate: staffProvider.staffsTrip[index].tripDate,
+                          );
+                          volunteerProvider.addApplication(newApplication);
+                        },
+                      ),
                     ),
-                  ),
-                );
-              },
-              itemCount: staffProvider.staffsTrip.length,
+                  );
+                },
+                itemCount: staffProvider.staffsTrip.length,
+              ),
             ),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text('Trips Application'),
+        ),
+      );
+    }
   }
 }

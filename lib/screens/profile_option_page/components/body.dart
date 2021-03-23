@@ -11,16 +11,48 @@ import 'package:provider/provider.dart';
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  List<Trip> tempList = [];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
+    staffProvider.getAllTrips();
+    tempList = staffProvider.staffsTrip;
+    if (tempList.length > 0) {
+      if (volunteerProvider.applicationList.length > 0) {
+        for (int i = 0; i < volunteerProvider.applicationList.length; i++) {
+          for (int j = 0; j < tempList.length; j++) {
+            tempList.removeWhere((element) =>
+                element.tripId == volunteerProvider.applicationList[i].tripId);
+          }
+        }
+      } else {
+        volunteerProvider
+            .getAllApplication(volunteerProvider.currentVolunteer.id);
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
+    volunteerProvider.clearApplicationList();
     if (volunteerProvider.applicationList.length == 0) {
       volunteerProvider
           .getAllApplication(volunteerProvider.currentVolunteer.id);
     }
+
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -36,7 +68,12 @@ class Body extends StatelessWidget {
             text: "Apply Trips",
             icon: "assets/icons/Bell.svg",
             press: () {
-              Navigator.pushNamed(context, TripsApplication.routeName);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => TripsApplication(
+                            tempList: tempList,
+                          )));
             },
           ),
           ProfileMenu(
