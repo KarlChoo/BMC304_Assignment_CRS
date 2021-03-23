@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Application with ChangeNotifier {
-  final String applicationId;
+  final String applicationId, description;
   final String applicationDate;
   final String status;
   final String remarks;
@@ -14,6 +14,7 @@ class Application with ChangeNotifier {
       {this.applicationId,
       @required this.applicationDate,
       this.remarks,
+      this.description,
       @required this.status,
       @required this.tripId,
       @required this.volunteerId,

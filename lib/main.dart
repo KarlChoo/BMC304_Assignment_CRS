@@ -1,3 +1,5 @@
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,8 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => VolunteerProvider()),
         ChangeNotifierProvider(create: (context) => StaffProvider()),
+        ChangeNotifierProvider(create: (context) => TripProvider()),
+        ChangeNotifierProvider(create: (context) => ApplicationProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

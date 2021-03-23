@@ -8,14 +8,10 @@ import 'package:http/http.dart' as http;
 class StaffProvider extends ChangeNotifier {
   Staff currentStaff;
   List<Staff> _systemStaffs = [];
-  List<Trip> _staffsTrip = [];
   List<Staff> get systemStaffs => _systemStaffs;
-  List<Trip> get staffsTrip => _staffsTrip;
 
   //List<Staff> staffs = [];
   String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
-  String tripsUrl =
-      'https://bmc304-67ba7-default-rtdb.firebaseio.com/trips.json';
   String paramUrl = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs/';
   Future<void> getAllSystemStaff() async {
     try {
@@ -42,35 +38,6 @@ class StaffProvider extends ChangeNotifier {
           loadingStaff.add(newStaff);
         });
         _systemStaffs = loadingStaff;
-        notifyListeners();
-      }
-    } catch (error) {
-      print(error);
-    }
-  }
-
-  Future<void> getAllTrips() async {
-    try {
-      final response = await http.get(Uri.parse(tripsUrl));
-      if (response.statusCode != 200) print('getAllTrips() method failed');
-      final extractedData = json.decode(response.body) as Map<String, dynamic>;
-      final List<Trip> loadingTrips = [];
-
-      if (extractedData != null || extractedData.length > 0) {
-        extractedData.forEach((tripId, tripData) {
-          Trip newTrip = Trip(
-            tripId: tripId,
-            description: tripData["description"],
-            tripDate: tripData["tripDate"],
-            location: tripData["location"],
-            crisisType: tripData["crisisType"],
-            numVolunteers: tripData["numVolunteers"],
-            staffId: tripData['staffId'],
-            remark: tripData["remark"],
-          );
-          loadingTrips.add(newTrip);
-        });
-        _staffsTrip = loadingTrips;
         notifyListeners();
       }
     } catch (error) {
@@ -186,40 +153,6 @@ class StaffProvider extends ChangeNotifier {
       //Add to local array only if operation success
       if (response.statusCode == 200) {
         systemStaffs.add(staff);
-        notifyListeners();
-        return true;
-      } else {
-        print('addStaff() method failed');
-      }
-    } catch (error) {
-      print(error);
-    }
-    return false;
-  }
-
-  Future<bool> addTrips(Trip trip) async {
-    try {
-      final response = await http.post(Uri.parse(tripsUrl),
-          body: json.encode({
-            'description': trip.description,
-            'tripDate': trip.tripDate,
-            'location': trip.location,
-            'crisisType': trip.crisisType,
-            'numVolunteers': trip.numVolunteers,
-            'remark': trip.remark,
-            'staffId': trip.staffId,
-          }));
-      Trip newTrip = Trip(
-          tripId: json.decode(response.body)['name'],
-          description: trip.description,
-          tripDate: trip.tripDate,
-          location: trip.location,
-          crisisType: trip.crisisType,
-          numVolunteers: trip.numVolunteers,
-          staffId: trip.staffId);
-      //Add to local array only if operation success
-      if (response.statusCode == 200) {
-        _staffsTrip.add(newTrip);
         notifyListeners();
         return true;
       } else {

@@ -1,5 +1,7 @@
 import 'package:bmc304_assignment_crs/models/trip.dart';
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
@@ -20,24 +22,18 @@ class _BodyState extends State<Body> {
   List<Trip> tempList = [];
 
   @override
-  void didChangeDependencies() {
+  void didChangeDependencies() async {
     super.didChangeDependencies();
-    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
-    VolunteerProvider volunteerProvider =
-        Provider.of<VolunteerProvider>(context);
-    staffProvider.getAllTrips();
-    tempList = staffProvider.staffsTrip;
-    if (tempList.length > 0) {
-      if (volunteerProvider.applicationList.length > 0) {
-        for (int i = 0; i < volunteerProvider.applicationList.length; i++) {
-          for (int j = 0; j < tempList.length; j++) {
-            tempList.removeWhere((element) =>
-                element.tripId == volunteerProvider.applicationList[i].tripId);
-          }
-        }
-      } else {
-        volunteerProvider
-            .getAllApplication(volunteerProvider.currentVolunteer.id);
+
+    TripProvider tripProvider = Provider.of<TripProvider>(context);
+    ApplicationProvider applicationProvider =
+        Provider.of<ApplicationProvider>(context);
+    tripProvider.getAllTrips();
+    tempList = tripProvider.staffsTrip;
+    if (tripProvider.staffsTrip.length > 0) {
+      for (int i = 0; i < applicationProvider.applicationList.length; i++) {
+        tripProvider.staffsTrip.removeWhere((element) =>
+            element.tripId == applicationProvider.applicationList[i].tripId);
       }
     }
   }
@@ -45,13 +41,11 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    ApplicationProvider applicationProvider =
+        Provider.of<ApplicationProvider>(context);
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
-    volunteerProvider.clearApplicationList();
-    if (volunteerProvider.applicationList.length == 0) {
-      volunteerProvider
-          .getAllApplication(volunteerProvider.currentVolunteer.id);
-    }
+    TripProvider tripProvider = Provider.of<TripProvider>(context);
 
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
@@ -72,14 +66,14 @@ class _BodyState extends State<Body> {
                   context,
                   MaterialPageRoute(
                       builder: (context) => TripsApplication(
-                            tempList: tempList,
+                            tempList: tripProvider.staffsTrip,
                           )));
             },
           ),
           ProfileMenu(
             text: "Application Status",
             icon: "assets/icons/Settings.svg",
-            press: () {
+            press: () async {
               Navigator.pushNamed(context, ApplicationStatus.routeName);
             },
           ),
@@ -94,6 +88,7 @@ class _BodyState extends State<Body> {
             press: () {
               staffProvider.signoutStaff();
               volunteerProvider.signoutVolunteer();
+              applicationProvider.clearApplicationList();
               Navigator.pushNamedAndRemoveUntil(context, SignInScreen.routeName,
                   (Route<dynamic> route) => false);
             },
