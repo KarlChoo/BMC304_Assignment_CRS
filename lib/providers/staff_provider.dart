@@ -10,7 +10,6 @@ class StaffProvider extends ChangeNotifier {
   List<Staff> _systemStaffs = [];
   List<Staff> get systemStaffs => _systemStaffs;
 
-  //List<Staff> staffs = [];
   String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
   String paramUrl = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs/';
   Future<void> getAllSystemStaff() async {
