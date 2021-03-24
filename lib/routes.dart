@@ -3,6 +3,7 @@ import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_ad
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_application/all_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_edit_profile/edit_profile_page.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
@@ -51,4 +52,5 @@ final Map<String, WidgetBuilder> routes = {
   UploadImagePage.routeName: (context) => UploadImagePage(),
   TripsApplication.routeName: (context) => TripsApplication(),
   ApplicationStatus.routeName: (context) => ApplicationStatus(),
+  AllApplication.routeName: (context) => AllApplication(),
 };

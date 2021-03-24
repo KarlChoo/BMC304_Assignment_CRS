@@ -50,7 +50,8 @@ class _SignFormState extends State<SignForm> {
   @override
   Widget build(BuildContext context) {
     StaffProvider staffProvider = Provider.of<StaffProvider>(context);
-    VolunteerProvider volunteerProvider = Provider.of<VolunteerProvider>(context);
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -124,7 +125,8 @@ class _SignFormState extends State<SignForm> {
                       usernameController.text, passwordController.text);
                   if (response == 0) {
                     //Login successful
-                    Navigator.pushReplacementNamed(context, LoginSuccessScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, LoginSuccessScreen.routeName);
                     usernameController.text = '';
                     passwordController.text = '';
                   } else if (response == 1) {
@@ -140,11 +142,14 @@ class _SignFormState extends State<SignForm> {
                       duration: Duration(seconds: 2),
                     ));
                   }
-                }else if (_typeSelected == 'Volunteer') {
+                } else if (_typeSelected == 'Volunteer') {
                   final response = await volunteerProvider.login(
-                      usernameController.text, passwordController.text);
+                    usernameController.text,
+                    passwordController.text,
+                  );
                   if (response != null) {
-                    Navigator.pushReplacementNamed(context, LoginSuccessScreen.routeName);
+                    Navigator.pushReplacementNamed(
+                        context, LoginSuccessScreen.routeName);
                     usernameController.text = '';
                     passwordController.text = '';
                   } else {
