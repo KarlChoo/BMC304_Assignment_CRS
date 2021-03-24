@@ -79,6 +79,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Application Status: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -102,6 +104,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Trip Date: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -125,6 +129,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Description: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -146,6 +152,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                     'Remarks: ',
                                                     style: TextStyle(
                                                         color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 16),
                                                   ),
                                                   Spacer(),

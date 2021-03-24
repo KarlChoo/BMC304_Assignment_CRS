@@ -25,7 +25,6 @@ class _BodyState extends State<Body> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-
     TripProvider tripProvider = Provider.of<TripProvider>(context);
     ApplicationProvider applicationProvider =
         Provider.of<ApplicationProvider>(context);
