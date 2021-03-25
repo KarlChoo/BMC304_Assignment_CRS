@@ -24,7 +24,6 @@ class _BodyState extends State<Body> {
     ApplicationProvider applicationProvider =
         Provider.of<ApplicationProvider>(context);
     tripProvider.getAllTrips();
-    tempList = tripProvider.staffsTrip;
     if (tripProvider.staffsTrip.length > 0) {
       for (int i = 0; i < applicationProvider.applicationList.length; i++) {
         tripProvider.staffsTrip.removeWhere((element) =>

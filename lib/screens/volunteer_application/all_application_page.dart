@@ -38,7 +38,9 @@ class _AllApplicationState extends State<AllApplication> {
               title: Text(
                   '${applicationProvider.applicationList[index].applicationDate.substring(0, 10)}'),
               subtitle: Text(
-                  '${applicationProvider.applicationList[index].description}'),
+                '${applicationProvider.applicationList[index].applicationId}',
+                style: TextStyle(color: Colors.grey, fontSize: 12),
+              ),
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 16, right: 16),
