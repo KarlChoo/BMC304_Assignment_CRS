@@ -1,7 +1,13 @@
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
+import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
+import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
 import '../enums.dart';
@@ -16,6 +22,12 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
+    ApplicationProvider applicationProvider =
+        Provider.of<ApplicationProvider>(context);
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
+    TripProvider tripProvider = Provider.of<TripProvider>(context);
     final Color inActiveIconColor = Color(0xFFB6B6B6);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14),
@@ -51,14 +63,19 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
               IconButton(
                 icon: Icon(
-                  Icons.person_rounded,
+                  Icons.logout,
                   color: MenuState.profile == selectedMenu
                       ? kPrimaryColor
                       : inActiveIconColor,
                   size: 30,
                 ),
-                onPressed: () => Navigator.pushNamedAndRemoveUntil(context,
-                    ProfileScreen.routeName, (Route<dynamic> route) => false),
+                onPressed: () {
+                  staffProvider.signoutStaff();
+                  volunteerProvider.signoutVolunteer();
+                  applicationProvider.clearApplicationList();
+                  Navigator.pushNamedAndRemoveUntil(context,
+                      SignInScreen.routeName, (Route<dynamic> route) => false);
+                },
               ),
             ],
           )),

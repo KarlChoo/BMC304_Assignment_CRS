@@ -5,6 +5,7 @@ import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_application/all_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_trips_application/trips_application_page.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +25,10 @@ class _BodyState extends State<Body> {
   @override
   void didChangeDependencies() async {
     super.didChangeDependencies();
-
     TripProvider tripProvider = Provider.of<TripProvider>(context);
     ApplicationProvider applicationProvider =
         Provider.of<ApplicationProvider>(context);
-    tripProvider.getAllTrips();
-    tempList = tripProvider.staffsTrip;
+    await tripProvider.getAllTrips();
     if (tripProvider.staffsTrip.length > 0) {
       for (int i = 0; i < applicationProvider.applicationList.length; i++) {
         tripProvider.staffsTrip.removeWhere((element) =>
@@ -78,9 +77,11 @@ class _BodyState extends State<Body> {
             },
           ),
           ProfileMenu(
-            text: "Help Center",
+            text: "All Application",
             icon: "assets/icons/Question mark.svg",
-            press: () {},
+            press: () {
+              Navigator.pushNamed(context, AllApplication.routeName);
+            },
           ),
           ProfileMenu(
             text: "Log Out",

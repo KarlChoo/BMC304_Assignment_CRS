@@ -42,7 +42,9 @@ class VolunteerProvider with ChangeNotifier {
           }
         });
       }
-      return currentVolunteer; //if there is no match (username and password), this method return null
+      notifyListeners();
+      return currentVolunteer;
+      //if there is no match (username and password), this method return null
     } catch (error) {
       print(error);
       return null;

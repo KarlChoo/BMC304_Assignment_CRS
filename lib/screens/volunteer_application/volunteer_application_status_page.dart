@@ -19,6 +19,11 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
         Provider.of<ApplicationProvider>(context);
     return Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_rounded),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           title: Text('Application List'),
         ),
         body: ListView.builder(
@@ -42,7 +47,7 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                     showBottomSheet(
                         context: context,
                         builder: (context) => Container(
-                              height: 225,
+                              height: 200,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   border: Border.all(
@@ -54,9 +59,13 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                 children: <Widget>[
                                   Expanded(
                                     child: Padding(
-                                      padding: const EdgeInsets.all(20),
+                                      padding: const EdgeInsets.all(12),
                                       child: Container(
-                                        color: Colors.grey.shade300,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: Colors.grey.shade200,
+                                        ),
                                         child: Column(
                                           children: [
                                             Padding(
@@ -70,6 +79,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Application Status: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -93,6 +104,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Trip Date: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -116,6 +129,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                         'Description: ',
                                                         style: TextStyle(
                                                             color: Colors.black,
+                                                            fontWeight:
+                                                                FontWeight.bold,
                                                             fontSize: 16),
                                                       ),
                                                       Spacer(),
@@ -137,6 +152,8 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
                                                     'Remarks: ',
                                                     style: TextStyle(
                                                         color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
                                                         fontSize: 16),
                                                   ),
                                                   Spacer(),
@@ -171,117 +188,5 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
           },
           itemCount: applicationProvider.applicationList.length,
         ));
-  }
-
-  showDetailBottomSheet(BuildContext context, Application application) {
-    return _scaffoldKey.currentState.showBottomSheet((context) {
-      return Container(
-        height: 400,
-        decoration: BoxDecoration(
-            color: Colors.white,
-            border: Border.all(color: Colors.grey.shade200, width: 2),
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(16), topLeft: Radius.circular(16))),
-        child: Column(
-          children: <Widget>[
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Container(
-                  color: Colors.grey.shade300,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Application Status: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '${application.status}',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                              ],
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Trip Date: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '${application.tripDate}',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                              ],
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Align(
-                            alignment: Alignment.topLeft,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Description: ',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                                Spacer(),
-                                Text(
-                                  '${application.description}',
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 16),
-                                ),
-                              ],
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Remarks: ',
-                              style:
-                                  TextStyle(color: Colors.black, fontSize: 16),
-                            ),
-                            Spacer(),
-                            application.remarks != null
-                                ? Text('${application.remarks}',
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 16))
-                                : Text('-'),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    },
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-        backgroundColor: Colors.white,
-        elevation: 2);
   }
 }

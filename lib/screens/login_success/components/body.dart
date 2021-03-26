@@ -1,4 +1,6 @@
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ import 'package:provider/provider.dart';
 class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final tripProvider = Provider.of<TripProvider>(context);
+    final applicationProvider = Provider.of<ApplicationProvider>(context);
     final staffProvider = Provider.of<StaffProvider>(context);
     final volunteerProvider = Provider.of<VolunteerProvider>(context);
 
@@ -59,7 +63,7 @@ class Body extends StatelessWidget {
               width: SizeConfig.screenWidth * 0.6,
               child: DefaultButton(
                 text: "Go to Dashboard",
-                press: () {
+                press: () async {
                   //Navigator.pushNamed(context, HomeScreen.routeName);
                   if (staffProvider.currentStaff != null) {
                     Navigator.pushReplacementNamed(
