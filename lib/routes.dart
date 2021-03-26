@@ -1,5 +1,5 @@
 import 'package:bmc304_assignment_crs/screens/manager_add_staff/manager_add_staff.dart';
-import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
@@ -42,7 +42,7 @@ final Map<String, WidgetBuilder> routes = {
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
   ManagerAddStaff.routeName: (context) => ManagerAddStaff(),
-  ManagerEditStaff.routeName: (context) => ManagerEditStaff(),
+  StaffEditPage.routeName: (context) => StaffEditPage(),
   ProfilePage.routeName: (context) => ProfilePage(),
   EditProfilePage.routeName: (context) => EditProfilePage(),
   UpdateDocumentPage.routeName: (context) => UpdateDocumentPage(),

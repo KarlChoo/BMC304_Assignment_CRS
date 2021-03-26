@@ -97,7 +97,7 @@ class _BodyState extends State<Body> {
     Staff staff = ModalRoute.of(context).settings.arguments;
 
     return SafeArea(
-        child: GestureDetector(
+      child: GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
         KeyboardUtil.hideKeyboard(context);
@@ -157,7 +157,7 @@ class _BodyState extends State<Body> {
               KeyboardUtil.hideKeyboard(context);
               if (_formKey.currentState.validate()) {
                 _formKey.currentState.save();
-                if(disableBtn) return;
+                if (disableBtn) return;
                 disableBtn = true;
                 await staffProvider.getAllSystemStaff();
 

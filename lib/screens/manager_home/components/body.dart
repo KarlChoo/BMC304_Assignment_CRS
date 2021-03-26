@@ -1,11 +1,13 @@
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/screens/manager_edit_staff/manager_edit_admin.dart';
+import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/components/staff_details.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../../../constants.dart';
 
 class Body extends StatefulWidget {
   @override
@@ -111,7 +113,7 @@ class _BodyState extends State<Body> {
                           text: "Edit Profile",
                           press: () {
                             Navigator.pushNamed(
-                                context, ManagerEditStaff.routeName,
+                                context, StaffEditPage.routeName,
                                 arguments: staffProvider.currentStaff);
                           },
                         ),
@@ -120,35 +122,85 @@ class _BodyState extends State<Body> {
                         width: getProportionateScreenWidth(10),
                       ),
                       Expanded(
-                        child: DefaultButton(
-                          text: "Logout",
-                          press: () {
-                            showDialog(
-                              context: context,
-                              builder: (context) => new AlertDialog(
-                                title: new Text('Are you sure?'),
-                                content: new Text('Do you want to logout'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () =>
-                                        Navigator.of(context).pop(false),
-                                    child: Text('No'),
+                        child: SizedBox(
+                          width: double.infinity,
+                          height: getProportionateScreenHeight(56),
+                          child: TextButton(
+                            style: TextButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    color: kPrimaryColor,
+                                    width: getProportionateScreenWidth(2),
                                   ),
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop(true);
-                                      staffProvider.signoutStaff();
-                                      Navigator.pushReplacementNamed(
-                                          context, SignInScreen.routeName);
-                                    },
-                                    child: Text('Yes'),
-                                  ),
-                                ],
+                                  borderRadius: BorderRadius.circular(20),
+                                )
+                            ),
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => new AlertDialog(
+                                  title: new Text('Are you sure?'),
+                                  content: new Text('Do you want to logout'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () =>
+                                          Navigator.of(context).pop(false),
+                                      child: Text('No'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).pop(true);
+                                        staffProvider.signoutStaff();
+                                        Navigator.pushReplacementNamed(
+                                            context, SignInScreen.routeName);
+                                      },
+                                      child: Text('Yes'),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: Text(
+                              "Logout",
+                              style: TextStyle(
+                                fontSize: getProportionateScreenWidth(18),
+                                color: kPrimaryColor,
                               ),
-                            );
-                          },
+                            ),
+                          ),
                         ),
-                      )
+                      ),
+                      // Expanded(
+                      //   child: DefaultButton(
+                      //     text: "Logout",
+                      //     press: () {
+                      //       showDialog(
+                      //         context: context,
+                      //         builder: (context) => new AlertDialog(
+                      //           title: new Text('Are you sure?'),
+                      //           content: new Text('Do you want to logout'),
+                      //           actions: <Widget>[
+                      //             TextButton(
+                      //               onPressed: () =>
+                      //                   Navigator.of(context).pop(false),
+                      //               child: Text('No'),
+                      //             ),
+                      //             TextButton(
+                      //               onPressed: () {
+                      //                 Navigator.of(context).pop(true);
+                      //                 staffProvider.signoutStaff();
+                      //                 Navigator.pushReplacementNamed(
+                      //                     context, SignInScreen.routeName);
+                      //               },
+                      //               child: Text('Yes'),
+                      //             ),
+                      //           ],
+                      //         ),
+                      //       );
+                      //     },
+                      //   ),
+                      // )
                     ],
                   )
                 ],

@@ -6,9 +6,10 @@ class ManagerAddStaff extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final staffPosition = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register New Admin"),
+        title: Text("Register New $staffPosition"),
       ),
       body: Body(),
     );

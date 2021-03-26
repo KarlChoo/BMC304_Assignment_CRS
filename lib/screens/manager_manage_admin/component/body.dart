@@ -1,4 +1,5 @@
 import 'package:bmc304_assignment_crs/components/staff_list_card.dart';
+import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
@@ -33,37 +34,74 @@ class _BodyState extends State<Body> {
     super.dispose();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     final staffProvider = Provider.of<StaffProvider>(context);
     var staffList = staffProvider.getAllCRSAdmin();
     //Remove own account from the list
     staffList.removeWhere((staff) => staff.id == staffProvider.currentStaff.id);
+    // final constStaffList = List.of(staffList);
+    //
+    // void searchFilterByName (String input) {
+    //   staffList.retainWhere(
+    //     (staff) => staff.firstName.toLowerCase().contains(input.toLowerCase()) ||
+    //       staff.lastName.toLowerCase().contains(input.toLowerCase())
+    //   );
+    // }
+
+    Container buildSearchBar() {
+      return Container(
+        width: SizeConfig.screenWidth,
+        decoration: BoxDecoration(
+          color: kSecondaryColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: TextField(
+          controller: searchController,
+          onChanged: (value) {
+            // staffList = constStaffList;
+            // searchFilterByName(value);
+            // print(staffList);
+            // print(constStaffList);
+          },
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20),
+                  vertical: getProportionateScreenHeight(15)),
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              hintText: "Search user...",
+              prefixIcon: Icon(Icons.search)),
+        ),
+      );
+    }
 
     Future<bool> _onWillPop() async {
       return (await showDialog(
-            context: context,
-            builder: (context) => new AlertDialog(
-              title: new Text('Are you sure?'),
-              content: new Text('Do you want to logout'),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('No'),
-                ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop(true);
-                    staffProvider.signoutStaff();
-                    Navigator.pushReplacementNamed(
-                        context, SignInScreen.routeName);
-                  },
-                  child: Text('Yes'),
-                ),
-              ],
+        context: context,
+        builder: (context) => new AlertDialog(
+          title: new Text('Are you sure?'),
+          content: new Text('Do you want to logout'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(false),
+              child: Text('No'),
             ),
-          )) ??
-          false;
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+                staffProvider.signoutStaff();
+                Navigator.pushReplacementNamed(
+                    context, SignInScreen.routeName);
+              },
+              child: Text('Yes'),
+            ),
+          ],
+        ),
+      )) ?? false;
     }
 
     return WillPopScope(
@@ -98,7 +136,8 @@ class _BodyState extends State<Body> {
                                         )
                                       ],
                                     ),
-                                  ))
+                                  )
+                            )
                           : Text("There are no admins in the system...")
                       : Column(
                           children: [
@@ -120,28 +159,7 @@ class _BodyState extends State<Body> {
         ),
       ),
     );
-  }
 
-  Container buildSearchBar() {
-    return Container(
-      width: SizeConfig.screenWidth,
-      decoration: BoxDecoration(
-        color: kSecondaryColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: TextField(
-        controller: searchController,
-        onChanged: (value) => print(value),
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20),
-                vertical: getProportionateScreenHeight(15)),
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            hintText: "Search user...",
-            prefixIcon: Icon(Icons.search)),
-      ),
-    );
+
   }
 }
