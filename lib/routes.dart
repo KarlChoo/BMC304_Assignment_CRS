@@ -1,6 +1,7 @@
 import 'package:bmc304_assignment_crs/screens/manager_add_staff/manager_add_staff.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
+import 'package:bmc304_assignment_crs/screens/admin_home/admin_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_admin/manager_manage_admin.dart';
 import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_manage_staffs.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/all_application_page.dart';
