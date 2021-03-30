@@ -218,7 +218,7 @@ class StaffListCard extends StatelessWidget {
                   ),
                 )
               ],
-            )
+            ),
           ],
         ),
       ),

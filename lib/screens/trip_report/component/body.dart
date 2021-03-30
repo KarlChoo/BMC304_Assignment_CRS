@@ -90,7 +90,6 @@ class _BodyState extends State<Body> {
                                 value: tripList[i],
                                 child: Column(
                                   children: [
-                                    
                                     TripDetailCard(),
                                     SizedBox(
                                       height:
@@ -140,7 +139,7 @@ class _BodyState extends State<Body> {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Search user...",
+            hintText: "Search trip...",
             prefixIcon: Icon(Icons.search)),
       ),
     );

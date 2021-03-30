@@ -15,8 +15,11 @@ class StaffProvider extends ChangeNotifier {
   Future<void> getAllSystemStaff() async {
     try {
       final response = await http.get(Uri.parse(url));
-      if (response.statusCode != 200)
+      print(response.body);
+      if (response.statusCode != 200) {
         print('getAllSystemStaff() method failed');
+        return;
+      }
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       final List<Staff> loadingStaff = [];
 
@@ -118,7 +121,10 @@ class StaffProvider extends ChangeNotifier {
     bool result = false;
     try {
       final response = await http.get(Uri.parse(url));
-      if (response.statusCode != 200) print('isUserExist() method failed');
+      if (response.statusCode != 200) {
+        print('isUserExist() method failed');
+        return false;
+      }
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
         extractedData.forEach((userId, userdata) {
