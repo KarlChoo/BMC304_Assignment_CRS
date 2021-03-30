@@ -43,3 +43,4 @@ pubspec.lock
 
 *.zip
 lib/hierachy.txt
+pubspec.lock
