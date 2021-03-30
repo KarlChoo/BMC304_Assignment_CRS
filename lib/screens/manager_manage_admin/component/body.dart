@@ -42,14 +42,7 @@ class _BodyState extends State<Body> {
     var staffList = staffProvider.getAllCRSAdmin();
     //Remove own account from the list
     staffList.removeWhere((staff) => staff.id == staffProvider.currentStaff.id);
-    // final constStaffList = List.of(staffList);
-    //
-    // void searchFilterByName (String input) {
-    //   staffList.retainWhere(
-    //     (staff) => staff.firstName.toLowerCase().contains(input.toLowerCase()) ||
-    //       staff.lastName.toLowerCase().contains(input.toLowerCase())
-    //   );
-    // }
+
 
     Container buildSearchBar() {
       return Container(
