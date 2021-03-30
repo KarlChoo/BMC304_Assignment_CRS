@@ -67,7 +67,7 @@ class TripProvider with ChangeNotifier {
         notifyListeners();
         return true;
       } else {
-        print('addStaff() method failed');
+        print('addTrips() method failed');
       }
     } catch (error) {
       print(error);

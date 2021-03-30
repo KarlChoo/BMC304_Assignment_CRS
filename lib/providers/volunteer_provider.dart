@@ -187,22 +187,12 @@ class VolunteerProvider with ChangeNotifier {
   }
 
   Future<void> signoutVolunteer() async {
-    // currentVolunteer = Volunteer(
-    //   username: '',
-    //   password: '',
-    //   phone: '',
-    //   email: '',
-    //   address: '',
-    //   firstName: '',
-    //   lastName: '',
-    // );
     currentVolunteer = null;
   }
 
   Future<void> updateVolunteerProfile(Volunteer volunteer) async {
     Uri uri = Uri.parse(
         "https://bmc304-67ba7-default-rtdb.firebaseio.com/volunteers/${volunteer.id}.json");
-
     try {
       await http.patch(uri,
           body: json.encode({
@@ -217,15 +207,4 @@ class VolunteerProvider with ChangeNotifier {
       print(error);
     }
   }
-
-// Future<void> populateData() async{
-  //   try{
-  //     // List<User> sampleUsers = [
-  //     //
-  //     // ];
-  //     // final response = await http.post(Uri.parse(userURL));
-  //   } catch (error) {
-  //
-  //   }
-  // }
 }
