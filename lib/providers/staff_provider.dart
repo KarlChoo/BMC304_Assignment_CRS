@@ -15,7 +15,6 @@ class StaffProvider extends ChangeNotifier {
   Future<void> getAllSystemStaff() async {
     try {
       final response = await http.get(Uri.parse(url));
-      print(response.body);
       if (response.statusCode != 200) {
         print('getAllSystemStaff() method failed');
         return;
