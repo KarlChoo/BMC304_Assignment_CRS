@@ -30,9 +30,13 @@ class _TripsApplicationState extends State<TripsApplication> {
         backgroundImage: AssetImage('assets/images/earthquakes.png'),
         backgroundColor: Colors.transparent,
       );
-    } else {
+    } else if (type == 'Wildfire') {
       return CircleAvatar(
         backgroundImage: AssetImage('assets/images/wildfire.png'),
+      );
+    } else {
+      return CircleAvatar(
+        backgroundImage: AssetImage('assets/images/otherdisaster.jpg'),
       );
     }
   }
@@ -50,6 +54,9 @@ class _TripsApplicationState extends State<TripsApplication> {
             widget.tempList.removeWhere((element) =>
                 element.tripId ==
                 applicationProvider.applicationList[i].tripId);
+            if (widget.tempList[j].numVolunteers < 1) {
+              widget.tempList.removeAt(j);
+            }
           }
         }
       }
