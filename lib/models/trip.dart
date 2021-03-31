@@ -20,7 +20,7 @@ class Trip with ChangeNotifier {
     @required this.location,
     @required this.crisisType,
     @required this.numVolunteers,
-    @required this.staffId,
+    this.staffId,
     this.remark,
   });
 }
