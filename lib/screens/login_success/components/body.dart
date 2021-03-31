@@ -2,6 +2,7 @@ import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
+import 'package:bmc304_assignment_crs/screens/admin_home/admin_home.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
@@ -66,8 +67,18 @@ class Body extends StatelessWidget {
                 press: () async {
                   //Navigator.pushNamed(context, HomeScreen.routeName);
                   if (staffProvider.currentStaff != null) {
-                    Navigator.pushReplacementNamed(
-                        context, ManagerHome.routeName);
+
+                    if (staffProvider.currentStaff.position=='Admin'){
+
+                      print('test');
+                      Navigator.pushReplacementNamed(
+                          context, AdminHome.routeName);
+                    }
+                    else{
+                      Navigator.pushReplacementNamed(
+                          context, ManagerHome.routeName);
+                    }
+
                   } else if (volunteerProvider.currentVolunteer != null) {
                     Navigator.pushReplacementNamed(
                         context, HomeScreen.routeName);
