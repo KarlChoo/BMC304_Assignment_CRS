@@ -97,7 +97,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                     children: [
                       CircleAvatar(
                           backgroundImage: _imageFile == null
-                              ? AssetImage("assets/images/Profile Image.png")
+                              ? AssetImage('assets/images/Empty-Background.png')
                               : FileImage(_imageFile)),
                     ],
                   ),
@@ -107,7 +107,9 @@ class _UploadImagePageState extends State<UploadImagePage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      child: Text('Upload Document'),
+                      style: ElevatedButton.styleFrom(
+                          primary: Colors.orangeAccent),
+                      child: Text('Submit'),
                       onPressed: () async {
                         if (_imageFile != null) {
                           await uploadImageToFirebase(context);
@@ -223,7 +225,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                       },
                                       child: Text('OK'),
                                       style: ElevatedButton.styleFrom(
-                                          primary: Colors.transparent),
+                                          primary: Colors.orangeAccent),
                                     ),
                                   ],
                                 );

@@ -4,6 +4,7 @@ import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/upload_images_page.dart';
 import 'package:date_format/date_format.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,34 +79,52 @@ class _UpdateDocumentPageState extends State<UpdateDocumentPage> {
                     ),
                   ),
                 ),
-                Text(
-                  '${date}',
-                  style: TextStyle(fontSize: 16, color: Colors.black),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: ElevatedButton(
+                            onPressed: () {
+                              showDate();
+                            },
+                            style: ElevatedButton.styleFrom(
+                                primary: kPrimaryColor),
+                            child: Text('Expiry Date (Optional)')),
+                      ),
+                    ),
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          '${date}',
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                IntrinsicWidth(
-                  stepWidth: double.infinity,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        showDate();
-                      },
-                      style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                      child: Text('Expiry Date')),
-                ),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => UploadImagePage(
-                                    selectedDate: date,
-                                    selectedValue: selectValue,
-                                  )));
-                    },
-                    style: ElevatedButton.styleFrom(primary: kPrimaryColor),
-                    child: Text('Next')),
               ],
             ),
           ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(30),
+          child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => UploadImagePage(
+                              selectedDate: date,
+                              selectedValue: selectValue,
+                            )));
+              },
+              style: ElevatedButton.styleFrom(primary: kPrimaryColor),
+              child: Text('Next')),
         ),
       ),
     );

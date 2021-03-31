@@ -41,6 +41,7 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ManagerHome.routeName: (context) => ManagerHome(),
+  AdminHome.routeName: (context) => AdminHome(),
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
   ManagerAddStaff.routeName: (context) => ManagerAddStaff(),

@@ -70,11 +70,30 @@ class CustomBottomNavBar extends StatelessWidget {
                   size: 30,
                 ),
                 onPressed: () {
-                  staffProvider.signoutStaff();
-                  volunteerProvider.signoutVolunteer();
-                  applicationProvider.clearApplicationList();
-                  Navigator.pushNamedAndRemoveUntil(context,
-                      SignInScreen.routeName, (Route<dynamic> route) => false);
+                  showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      title: new Text('Are you sure?'),
+                      content: new Text('Do you want to logout'),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text('No'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                            staffProvider.signoutStaff();
+                            volunteerProvider.signoutVolunteer();
+                            applicationProvider.clearApplicationList();
+                            Navigator.pushReplacementNamed(
+                                context, SignInScreen.routeName);
+                          },
+                          child: Text('Yes'),
+                        ),
+                      ],
+                    ),
+                  );
                 },
               ),
             ],

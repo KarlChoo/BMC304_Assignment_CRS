@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../enums.dart';
 import '../../components/staff_btm_nav.dart';
 
-class ManagerHome extends StatelessWidget {
-  static String routeName = "/manager_home";
+class AdminHome extends StatelessWidget {
+  static String routeName = "/admin_home";
 
   @override
   Widget build(BuildContext context) {
