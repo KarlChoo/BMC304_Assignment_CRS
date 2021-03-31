@@ -1,3 +1,4 @@
+import 'package:bmc304_assignment_crs/screens/admin_organize_trips/admin_organize_trips.dart';
 import 'package:bmc304_assignment_crs/screens/manager_add_staff/manager_add_staff.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
@@ -41,6 +42,9 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ManagerHome.routeName: (context) => ManagerHome(),
+  AdminHome.routeName: (context) => AdminHome(),
+  AdminOrganizeTrip.routeName: (context) => AdminOrganizeTrip(),
+  //AdminManageApplication.routeName: (context) => AdminManageApplication(),
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
   ManagerAddStaff.routeName: (context) => ManagerAddStaff(),

@@ -1,6 +1,5 @@
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/components/staff_details.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
@@ -9,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../constants.dart';
+
 
 class Body extends StatefulWidget {
   @override
