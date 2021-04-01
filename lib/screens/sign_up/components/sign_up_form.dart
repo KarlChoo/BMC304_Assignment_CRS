@@ -1,12 +1,9 @@
-import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
 import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_screen.dart';
-
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +39,6 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
-    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -103,8 +99,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Confirm Password",
         hintText: "Re-enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
@@ -136,8 +130,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
@@ -165,8 +157,6 @@ class _SignUpFormState extends State<SignUpForm> {
       decoration: InputDecoration(
         labelText: "Username",
         hintText: "Enter your username",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),

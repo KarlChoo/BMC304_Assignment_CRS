@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
 import 'package:bmc304_assignment_crs/helper/keyboard.dart';
-import 'package:bmc304_assignment_crs/screens/forgot_password/forgot_password_screen.dart';
 import 'package:bmc304_assignment_crs/screens/login_success/login_success_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -24,14 +23,12 @@ class _SignFormState extends State<SignForm> {
   String username;
   String password;
   bool remember = false;
+  String _typeSelected;
   final List<String> errors = [];
-
   var _type = [
     'Staff',
     'Volunteer',
   ];
-
-  String _typeSelected;
 
   void addError({String error}) {
     if (!errors.contains(error))

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:bmc304_assignment_crs/components/socal_card.dart';
 import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/no_account_text.dart';
-import 'package:bmc304_assignment_crs/components/socal_card.dart';
 import '../../../size_config.dart';
 import 'sign_form.dart';
 

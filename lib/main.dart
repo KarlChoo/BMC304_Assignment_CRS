@@ -7,11 +7,8 @@ import 'package:bmc304_assignment_crs/routes.dart';
 import 'package:bmc304_assignment_crs/screens/splash/splash_screen.dart';
 import 'package:bmc304_assignment_crs/theme.dart';
 import 'package:provider/provider.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await FirebaseApp();
   runApp(MyApp());
 }
 

@@ -4,7 +4,6 @@ import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
-import 'package:bmc304_assignment_crs/screens/profile_option_page/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
