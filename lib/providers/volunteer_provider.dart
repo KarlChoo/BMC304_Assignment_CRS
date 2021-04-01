@@ -99,7 +99,7 @@ class VolunteerProvider with ChangeNotifier {
     return result;
   }
 
-  Future<Volunteer> addVolunteer(Volunteer volunteer) async {
+  Future<bool> addVolunteer(Volunteer volunteer) async {
     final response = await http.post(volunteerFileURL,
         body: json.encode({
           'username': volunteer.username,
@@ -110,20 +110,22 @@ class VolunteerProvider with ChangeNotifier {
           'firstName': volunteer.firstName,
           'lastName': volunteer.lastName,
         }));
-    Volunteer newVolunteer = Volunteer(
-      id: json.decode(
-          response.body)['name'], //name is the database name for the data
-      username: volunteer.username,
-      firstName: volunteer.firstName,
-      lastName: volunteer.lastName,
-      password: volunteer.password,
-      email: volunteer.email,
-      phone: volunteer.phone,
-      address: volunteer.address,
-    );
-    currentVolunteer = newVolunteer;
+    if (response.statusCode != 200) {
+      Volunteer newVolunteer = Volunteer(
+        id: json.decode(
+            response.body)['name'], //name is the database name for the data
+        username: volunteer.username,
+        firstName: volunteer.firstName,
+        lastName: volunteer.lastName,
+        password: volunteer.password,
+        email: volunteer.email,
+        phone: volunteer.phone,
+        address: volunteer.address,
+      );
+      return true;
+    }
     notifyListeners();
-    return currentVolunteer;
+    return false;
   }
 
   Future<void> addDocument(Document document) async {

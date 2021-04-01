@@ -83,11 +83,57 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                 if (isVolunteerExist == false) {
                   final response =
                       await volunteerProvider.addVolunteer(newVolunteer);
-                  if (response.id != null) {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context,
-                        SignInScreen.routeName,
-                        (Route<dynamic> route) => false);
+                  if (response == true) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Congratulations!',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            content: Text('You have successfully registered!'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                onPressed: () async {
+                                  await Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      SignInScreen.routeName,
+                                      (Route<dynamic> route) => false);
+                                },
+                                child: Text('OK'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.orangeAccent),
+                              ),
+                            ],
+                          );
+                        });
+                  } else {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text(
+                              'Warning!',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            content: Text(
+                                'Registered Process has failed! Please try again later.'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                onPressed: () async {
+                                  await Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      SignInScreen.routeName,
+                                      (Route<dynamic> route) => false);
+                                },
+                                child: Text('OK'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.orangeAccent),
+                              ),
+                            ],
+                          );
+                        });
                   }
                 }
               }
