@@ -9,6 +9,8 @@ class TripProvider with ChangeNotifier {
 
   List<Trip> get staffsTrip => _staffTrip;
 
+
+
   String tripsUrl =
       'https://bmc304-67ba7-default-rtdb.firebaseio.com/trips.json';
 
@@ -41,7 +43,22 @@ class TripProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> addTrips(Trip trip) async {
+
+  List<Trip> getTripsByAdmin(String staffId){
+    final List<Trip> tripList = [];
+
+    staffsTrip.forEach((trip){
+      if (trip.staffId == staffId){
+        tripList.add(trip);
+      }
+    });
+    return tripList;
+
+
+
+  }
+
+  Future<bool> addTrip(Trip trip) async {
     try {
       final response = await http.post(Uri.parse(tripsUrl),
           body: json.encode({
