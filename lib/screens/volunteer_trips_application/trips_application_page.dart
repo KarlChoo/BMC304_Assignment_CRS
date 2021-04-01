@@ -1,8 +1,6 @@
 import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
-import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,8 +63,6 @@ class _TripsApplicationState extends State<TripsApplication> {
 
   @override
   Widget build(BuildContext context) {
-    TripProvider tripProvider = Provider.of<TripProvider>(context);
-    StaffProvider staffProvider = Provider.of<StaffProvider>(context);
     ApplicationProvider applicationProvider =
         Provider.of<ApplicationProvider>(context);
     VolunteerProvider volunteerProvider =
@@ -104,17 +100,6 @@ class _TripsApplicationState extends State<TripsApplication> {
                       trailing: ElevatedButton(
                         child: Text('Apply'),
                         onPressed: () async {
-                          for (int i = 0;
-                              i < tripProvider.staffsTrip.length;
-                              i++) {
-                            for (int j = 0; j < widget.tempList.length; j++) {
-                              if (widget.tempList[index].tripId ==
-                                  tripProvider.staffsTrip[i].tripId) {
-                                index2 = j;
-                                // print(widget.tempList[i].tripId);
-                              }
-                            }
-                          }
                           Application newApplication = Application(
                             applicationDate: DateTime.now().toString(),
                             status: 'New',

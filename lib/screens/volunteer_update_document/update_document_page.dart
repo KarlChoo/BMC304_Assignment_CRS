@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:bmc304_assignment_crs/constants.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/upload_images_page.dart';
 import 'package:date_format/date_format.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:image_picker/image_picker.dart';
 
 class UpdateDocumentPage extends StatefulWidget {
   static const routeName = '/UpdateDocument';
@@ -18,7 +13,6 @@ class UpdateDocumentPage extends StatefulWidget {
 class _UpdateDocumentPageState extends State<UpdateDocumentPage> {
   String date = '';
   String selectValue = 'Passport';
-
   showDate() async {
     final DateTime newDate = await showDatePicker(
       context: context,

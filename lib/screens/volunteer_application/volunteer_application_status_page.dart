@@ -1,6 +1,4 @@
-import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
-import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -11,8 +9,6 @@ class ApplicationStatus extends StatefulWidget {
 }
 
 class _ApplicationStatusState extends State<ApplicationStatus> {
-  GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     ApplicationProvider applicationProvider =

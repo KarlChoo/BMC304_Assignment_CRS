@@ -4,13 +4,11 @@ import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 import '../../size_config.dart';
 
 class EditProfilePage extends StatefulWidget {
   static const routeName = '/Editprofile';
-
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
@@ -127,11 +125,29 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                   HomeScreen.routeName,
                                   (Route<dynamic> route) => false);
                             } else {
-                              // Scaffold.of(context).showSnackBar(new SnackBar(
-                              //   content: Text(
-                              //       'Please change something before you update!'),
-                              //   duration: Duration(seconds: 2),
-                              print('test');
+                              showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text(
+                                        'Warning!',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      content: Text(
+                                          'Please change something before you update!'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: Text('OK'),
+                                          style: ElevatedButton.styleFrom(
+                                              primary: Colors.orangeAccent),
+                                        ),
+                                      ],
+                                    );
+                                  });
                             }
                           },
                           child: Text('Update'))),
@@ -170,8 +186,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       decoration: InputDecoration(
         labelText: "Password",
         hintText: "Enter your password",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
@@ -199,8 +213,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       decoration: InputDecoration(
         labelText: "Phone Number",
         hintText: "Enter your phone number",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
       ),
@@ -227,8 +239,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       decoration: InputDecoration(
         labelText: "Last Name",
         hintText: "Enter your last name",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
@@ -255,8 +265,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
       decoration: InputDecoration(
         labelText: "First Name",
         hintText: "Enter your first name",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),

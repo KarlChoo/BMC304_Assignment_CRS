@@ -180,10 +180,4 @@ class _AllApplicationState extends State<AllApplication> {
       ),
     );
   }
-
-  showContainer() {
-    return Container(
-      child: Text('test'),
-    );
-  }
 }
