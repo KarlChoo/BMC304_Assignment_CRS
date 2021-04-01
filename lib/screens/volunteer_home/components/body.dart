@@ -37,8 +37,6 @@ class _BodyState extends State<Body> {
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
     TripProvider tripProvider = Provider.of<TripProvider>(context);
-    ApplicationProvider applicationProvider =
-        Provider.of<ApplicationProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -76,7 +74,11 @@ class _BodyState extends State<Body> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  '${volunteerProvider.currentVolunteer.firstName + volunteerProvider.currentVolunteer.lastName}',
+                                  volunteerProvider
+                                              .currentVolunteer.firstName !=
+                                          null
+                                      ? '${volunteerProvider.currentVolunteer.firstName + volunteerProvider.currentVolunteer.lastName}'
+                                      : '-',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,

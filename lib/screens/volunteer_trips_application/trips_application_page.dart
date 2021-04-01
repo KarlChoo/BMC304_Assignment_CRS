@@ -2,6 +2,7 @@ import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +17,6 @@ class TripsApplication extends StatefulWidget {
 
 class _TripsApplicationState extends State<TripsApplication> {
   bool isEnabled = true;
-  int index2;
-  List<Trip> tempList = [];
   crisisIcons(String type) {
     if (type == 'Flood') {
       return CircleAvatar(
@@ -110,6 +109,36 @@ class _TripsApplicationState extends State<TripsApplication> {
                             description: widget.tempList[index].description,
                           );
                           applicationProvider.addApplication(newApplication);
+                          if (widget.tempList.length == 1) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text(
+                                      'Warning!',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    content:
+                                        Text('You have applied all the trips!'),
+                                    actions: <Widget>[
+                                      ElevatedButton(
+                                        onPressed: () async {
+                                          await Navigator
+                                              .pushNamedAndRemoveUntil(
+                                                  context,
+                                                  HomeScreen.routeName,
+                                                  (Route<dynamic> route) =>
+                                                      false);
+                                        },
+                                        child: Text('OK'),
+                                        style: ElevatedButton.styleFrom(
+                                            primary: Colors.orangeAccent),
+                                      ),
+                                    ],
+                                  );
+                                });
+                          }
                         },
                       ),
                     ),
