@@ -1,4 +1,5 @@
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
@@ -20,7 +21,7 @@ class _SignUpFormState extends State<SignUpForm> {
   String email3;
   String password3;
   String confirmPassword;
-  bool remember = false;
+  bool exist = false;
   final List<String> errors = [];
 
   void addError({String error}) {
@@ -39,6 +40,8 @@ class _SignUpFormState extends State<SignUpForm> {
 
   @override
   Widget build(BuildContext context) {
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
     return Form(
       key: _formKey,
       child: Column(
@@ -52,21 +55,28 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
               text: "Continue",
-              press: () {
+              press: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
                   // if all are valid then go to success screen
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => CompleteProfileScreen(
-                                username: username.text,
-                                password: password2.text,
-                              )));
+                  exist =
+                      await volunteerProvider.isVolunteerExist(username.text);
+                  if (exist == false) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CompleteProfileScreen(
+                                  username: username.text,
+                                  password: password2.text,
+                                )));
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(
+                          'Username ${username.text} already exist in Volunteer!'),
+                      duration: Duration(seconds: 2),
+                    ));
+                  }
                 }
-                //     //false means remove all the page before this.
-                //   }
-                // }
               }),
         ],
       ),
@@ -100,7 +110,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Confirm Password",
         hintText: "Re-enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }
@@ -131,7 +140,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Password",
         hintText: "Enter your password",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Lock.svg"),
       ),
     );
   }
@@ -158,7 +166,6 @@ class _SignUpFormState extends State<SignUpForm> {
         labelText: "Username",
         hintText: "Enter your username",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }

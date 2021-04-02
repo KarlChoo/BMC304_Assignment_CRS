@@ -100,6 +100,7 @@ class VolunteerProvider with ChangeNotifier {
   }
 
   Future<bool> addVolunteer(Volunteer volunteer) async {
+    bool success = false;
     final response = await http.post(volunteerFileURL,
         body: json.encode({
           'username': volunteer.username,
@@ -110,7 +111,7 @@ class VolunteerProvider with ChangeNotifier {
           'firstName': volunteer.firstName,
           'lastName': volunteer.lastName,
         }));
-    if (response.statusCode != 200) {
+    if (response.statusCode == 200) {
       Volunteer newVolunteer = Volunteer(
         id: json.decode(
             response.body)['name'], //name is the database name for the data
@@ -122,10 +123,11 @@ class VolunteerProvider with ChangeNotifier {
         phone: volunteer.phone,
         address: volunteer.address,
       );
-      return true;
+      success = true;
+      return success;
     }
     notifyListeners();
-    return false;
+    return success;
   }
 
   Future<void> addDocument(Document document) async {

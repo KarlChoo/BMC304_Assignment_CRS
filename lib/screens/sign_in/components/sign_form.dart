@@ -23,6 +23,7 @@ class _SignFormState extends State<SignForm> {
   String username;
   String password;
   bool remember = false;
+  bool exist = false;
   String _typeSelected;
   final List<String> errors = [];
   var _type = [
@@ -118,40 +119,60 @@ class _SignFormState extends State<SignForm> {
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
                 if (_typeSelected == 'Staff') {
-                  final response = await staffProvider.login(
-                      usernameController.text, passwordController.text);
-                  if (response == 0) {
-                    //Login successful
-                    Navigator.pushReplacementNamed(
-                        context, LoginSuccessScreen.routeName);
-                    usernameController.text = '';
-                    passwordController.text = '';
-                  } else if (response == 1) {
-                    //Login failed
+                  exist =
+                      await staffProvider.isUserExist(usernameController.text);
+                  if (exist == true) {
+                    final response = await staffProvider.login(
+                        usernameController.text, passwordController.text);
+                    if (response == 0) {
+                      //Login successful
+                      Navigator.pushReplacementNamed(
+                          context, LoginSuccessScreen.routeName);
+                      usernameController.text = '';
+                      passwordController.text = '';
+                    } else if (response == 1) {
+                      //Login failed
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Wrong Username or Password!'),
+                        duration: Duration(seconds: 2),
+                      ));
+                    } else if (response == 2) {
+                      //Suspended
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Account has been suspended'),
+                        duration: Duration(seconds: 2),
+                      ));
+                    }
+                  } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Wrong Username or Password!'),
-                      duration: Duration(seconds: 2),
-                    ));
-                  } else if (response == 2) {
-                    //Suspended
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Account has been suspended'),
+                      content: Text(
+                          'No account with ${usernameController.text} exist in Staff!'),
                       duration: Duration(seconds: 2),
                     ));
                   }
                 } else if (_typeSelected == 'Volunteer') {
-                  final response = await volunteerProvider.login(
-                    usernameController.text,
-                    passwordController.text,
-                  );
-                  if (response != null) {
-                    Navigator.pushReplacementNamed(
-                        context, LoginSuccessScreen.routeName);
-                    usernameController.text = '';
-                    passwordController.text = '';
+                  exist = await volunteerProvider
+                      .isVolunteerExist(usernameController.text);
+                  if (exist == true) {
+                    final response = await volunteerProvider.login(
+                      usernameController.text,
+                      passwordController.text,
+                    );
+                    if (response != null) {
+                      Navigator.pushReplacementNamed(
+                          context, LoginSuccessScreen.routeName);
+                      usernameController.text = '';
+                      passwordController.text = '';
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Wrong Username or Password!'),
+                        duration: Duration(seconds: 2),
+                      ));
+                    }
                   } else {
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Wrong Username or Password!'),
+                      content: Text(
+                          'No account with ${usernameController.text} exist in Volunteer!'),
                       duration: Duration(seconds: 2),
                     ));
                   }
@@ -212,13 +233,15 @@ class _SignFormState extends State<SignForm> {
       onSaved: (newValue) => username = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
-          removeError(error: kEmailNullError);
+          removeError(error: kUsernameNullError);
         }
         return null;
       },
       validator: (value) {
+        removeError(error: kUsernameNullError);
+
         if (value.isEmpty) {
-          addError(error: kEmailNullError);
+          addError(error: kUsernameNullError);
           return "";
         }
         return null;
