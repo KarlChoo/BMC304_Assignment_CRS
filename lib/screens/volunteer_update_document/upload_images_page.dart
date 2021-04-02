@@ -45,7 +45,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                   ? TextFormField(
                       controller: certName,
                       decoration: InputDecoration(
-                        labelText: 'Document Name',
+                        labelText: 'Certificate Name',
                       ),
                     )
                   : Container(),
@@ -107,8 +107,8 @@ class _UploadImagePageState extends State<UploadImagePage> {
                 children: [
                   Expanded(
                     child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.orangeAccent),
+                      style:
+                          ElevatedButton.styleFrom(primary: Color(0xFFFF7643)),
                       child: Text('Submit'),
                       onPressed: () async {
                         if (_imageFile != null) {
@@ -137,7 +137,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     content: Text(
-                                        'Please fill in the name of document!'),
+                                        'Please fill in the name of Certificate!'),
                                     actions: <Widget>[
                                       ElevatedButton(
                                         onPressed: () {
@@ -145,7 +145,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                         },
                                         child: Text('OK'),
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.transparent),
+                                            primary: Color(0xFFFF7643)),
                                       ),
                                     ],
                                   );
@@ -177,7 +177,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                     content: Text(
-                                        'Please fill in the country of the country!'),
+                                        'Please fill in the name of the country!'),
                                     actions: <Widget>[
                                       ElevatedButton(
                                         onPressed: () {
@@ -185,7 +185,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                         },
                                         child: Text('OK'),
                                         style: ElevatedButton.styleFrom(
-                                            primary: Colors.transparent),
+                                            primary: Color(0xFFFF7643)),
                                       ),
                                     ],
                                   );
@@ -217,7 +217,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                         TextStyle(fontWeight: FontWeight.bold),
                                   ),
                                   content: Text(
-                                      'Please upload an images of document!'),
+                                      'Please upload an images of document before you submit!'),
                                   actions: <Widget>[
                                     ElevatedButton(
                                       onPressed: () {
@@ -225,7 +225,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                                       },
                                       child: Text('OK'),
                                       style: ElevatedButton.styleFrom(
-                                          primary: Colors.orangeAccent),
+                                          primary: Color(0xFFFF7643)),
                                     ),
                                   ],
                                 );
@@ -246,7 +246,9 @@ class _UploadImagePageState extends State<UploadImagePage> {
   void takePhoto(ImageSource source) async {
     final pickedFile = await _picker.getImage(source: source);
     setState(() {
-      _imageFile = File(pickedFile.path);
+      if (pickedFile != null) {
+        _imageFile = File(pickedFile.path);
+      }
     });
   }
 

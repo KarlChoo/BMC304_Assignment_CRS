@@ -78,63 +78,59 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
                   firstName: firstNameController.text,
                   lastName: lastNameController.text,
                 );
-                final isVolunteerExist =
-                    await volunteerProvider.isVolunteerExist(widget.username);
-                if (isVolunteerExist == false) {
-                  final response =
-                      await volunteerProvider.addVolunteer(newVolunteer);
-                  if (response == true) {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'Congratulations!',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                final response =
+                    await volunteerProvider.addVolunteer(newVolunteer);
+                if (response == true) {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Congratulations!',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text('You have successfully registered!'),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              onPressed: () async {
+                                await Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    SignInScreen.routeName,
+                                    (Route<dynamic> route) => false);
+                              },
+                              child: Text('OK'),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xFFFF7643)),
                             ),
-                            content: Text('You have successfully registered!'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                onPressed: () async {
-                                  await Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      SignInScreen.routeName,
-                                      (Route<dynamic> route) => false);
-                                },
-                                child: Text('OK'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.orangeAccent),
-                              ),
-                            ],
-                          );
-                        });
-                  } else {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: Text(
-                              'Warning!',
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                          ],
+                        );
+                      });
+                } else {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text(
+                            'Warning!',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          content: Text(
+                              'Registered Process has failed! Please try again later.'),
+                          actions: <Widget>[
+                            ElevatedButton(
+                              onPressed: () async {
+                                await Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    SignInScreen.routeName,
+                                    (Route<dynamic> route) => false);
+                              },
+                              child: Text('OK'),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xFFFF7643)),
                             ),
-                            content: Text(
-                                'Registered Process has failed! Please try again later.'),
-                            actions: <Widget>[
-                              ElevatedButton(
-                                onPressed: () async {
-                                  await Navigator.pushNamedAndRemoveUntil(
-                                      context,
-                                      SignInScreen.routeName,
-                                      (Route<dynamic> route) => false);
-                                },
-                                child: Text('OK'),
-                                style: ElevatedButton.styleFrom(
-                                    primary: Colors.orangeAccent),
-                              ),
-                            ],
-                          );
-                        });
-                  }
+                          ],
+                        );
+                      });
                 }
               }
             },
@@ -163,18 +159,15 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       },
       decoration: InputDecoration(
         labelText: "Address",
-        hintText: "Enter your phone address",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
+        hintText: "Enter your address",
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon:
-            CustomSurffixIcon(svgIcon: "assets/icons/Location point.svg"),
       ),
     );
   }
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
+      maxLength: 10,
       controller: phoneNumberController,
       keyboardType: TextInputType.phone,
       onSaved: (newValue) => phoneNumber = newValue,
@@ -194,10 +187,7 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       decoration: InputDecoration(
         labelText: "Phone Number",
         hintText: "Enter your phone number",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
+        counterText: "",
       ),
     );
   }
@@ -222,10 +212,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       decoration: InputDecoration(
         labelText: "Last Name",
         hintText: "Enter your last name",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }
@@ -250,10 +236,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       decoration: InputDecoration(
         labelText: "First Name",
         hintText: "Enter your first name",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/User.svg"),
       ),
     );
   }
@@ -284,10 +266,6 @@ class _CompleteProfileFormState extends State<CompleteProfileForm> {
       decoration: InputDecoration(
         labelText: "Email",
         hintText: "Enter your email",
-        // If  you are using latest version of flutter then lable text and hint text shown like this
-        // if you r using flutter less then 1.20.* then maybe this is not working properly
-        floatingLabelBehavior: FloatingLabelBehavior.always,
-        suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Mail.svg"),
       ),
     );
   }

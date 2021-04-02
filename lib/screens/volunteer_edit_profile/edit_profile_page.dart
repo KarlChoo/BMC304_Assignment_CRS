@@ -94,6 +94,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 children: [
                   Expanded(
                       child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              primary: Color(0xFFFF7643)),
                           onPressed: () {
                             if (firstNameController.text !=
                                     volunteerProvider
@@ -143,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                           },
                                           child: Text('OK'),
                                           style: ElevatedButton.styleFrom(
-                                              primary: Colors.orangeAccent),
+                                              primary: Color(0xFFFF7643)),
                                         ),
                                       ],
                                     );
