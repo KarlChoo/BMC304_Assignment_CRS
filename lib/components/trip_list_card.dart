@@ -1,7 +1,5 @@
 import 'package:bmc304_assignment_crs/models/trip.dart';
-import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
-//add trip edit page here
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,7 +8,6 @@ import '../size_config.dart';
 class TripListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final tripProvider = Provider.of<TripProvider>(context);
     final trip = Provider.of<Trip>(context);
     return Card(
       color: Colors.white,

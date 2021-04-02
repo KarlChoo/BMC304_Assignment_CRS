@@ -1,4 +1,5 @@
 import 'package:bmc304_assignment_crs/components/default_button.dart';
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:bmc304_assignment_crs/screens/manager_home/components/staff_details.dart';
@@ -26,6 +27,10 @@ class _BodyState extends State<Body> {
       });
     }
     super.didChangeDependencies();
+    final applicationProvider = Provider.of<ApplicationProvider>(context);
+    if (applicationProvider.applicationList.length == 0) {
+      applicationProvider.getApplicationOfAdmin(Provider.of<StaffProvider>(context).currentStaff.id);
+    }
   }
 
   @override

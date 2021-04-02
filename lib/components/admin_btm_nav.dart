@@ -1,9 +1,7 @@
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/screens/admin_home/admin_home.dart';
+import 'package:bmc304_assignment_crs/screens/admin_manage_applications/admin_manage_applications.dart';
 import 'package:bmc304_assignment_crs/screens/admin_organize_trips/admin_organize_trips.dart';
-import 'package:bmc304_assignment_crs/screens/manager_home/manager_home.dart';
-import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
-import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -56,14 +54,14 @@ class AdminBottomNav extends StatelessWidget {
           ),
         ),
       );
-      /*SizedBox manageApplicationBtn = SizedBox.fromSize(
+      SizedBox manageApplicationBtn = SizedBox.fromSize(
         size: Size(54, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != AdminMenuState.manage_application)
               //Navigator.pushNamedAndRemoveUntil(context, ManagerManageAdmin.routeName, ModalRoute.withName('/sign_in'));
               Navigator.pushReplacementNamed(
-                  context, AdminManageApplication.routeName);
+                  context, AdminManageApplications.routeName);
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,18 +75,17 @@ class AdminBottomNav extends StatelessWidget {
                     : inActiveIconColor,
               ),
               Text(
-                "Admin",
+                "Applications",
                 style: TextStyle(
                     color: AdminMenuState.manage_application == selectedMenu
                         ? kPrimaryColor
                         : inActiveIconColor,
-                    fontSize: 11),
+                    fontSize: 9),
               )
             ],
           ),
         ),
       );
-      */
       SizedBox organizeTripBtn = SizedBox.fromSize(
         size: Size(54, 54),
         child: GestureDetector(
@@ -123,7 +120,7 @@ class AdminBottomNav extends StatelessWidget {
 
 
       navButtonsList.add(adminHomeBtn);
-      //navButtonsList.add(manageApplicationBtn);
+      navButtonsList.add(manageApplicationBtn);
       navButtonsList.add(organizeTripBtn);
 
       return navButtonsList;

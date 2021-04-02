@@ -1,4 +1,5 @@
 import 'package:bmc304_assignment_crs/screens/admin_add_trip/admin_add_trip.dart';
+import 'package:bmc304_assignment_crs/screens/admin_manage_applications/admin_manage_applications.dart';
 import 'package:bmc304_assignment_crs/screens/admin_organize_trips/admin_organize_trips.dart';
 import 'package:bmc304_assignment_crs/screens/manager_add_staff/manager_add_staff.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
@@ -22,6 +23,7 @@ import 'package:bmc304_assignment_crs/screens/volunteer_home/home_screen.dart';
 import 'package:bmc304_assignment_crs/screens/login_success/login_success_screen.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/screens/splash/splash_screen.dart';
+import 'components/application_list_card.dart';
 import 'screens/sign_up/sign_up_screen.dart';
 
 // All our routes will be available here
@@ -37,7 +39,7 @@ final Map<String, WidgetBuilder> routes = {
   AdminHome.routeName: (context) => AdminHome(),
   AdminOrganizeTrip.routeName: (context) => AdminOrganizeTrip(),
   AdminAddTrip.routeName: (context) => AdminAddTrip(),
-  //AdminManageApplication.routeName: (context) => AdminManageApplication(),
+  AdminManageApplications.routeName: (context) => AdminManageApplications(),
   ManagerManageAdmin.routeName: (context) => ManagerManageAdmin(),
   ManagerManageStaff.routeName: (context) => ManagerManageStaff(),
   ManagerAddStaff.routeName: (context) => ManagerAddStaff(),
