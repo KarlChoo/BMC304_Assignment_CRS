@@ -40,6 +40,30 @@ class _BodyState extends State<Body> {
     //Remove own account from the list
     staffList.removeWhere((staff) => staff.id == staffProvider.currentStaff.id);
 
+
+    Container buildSearchBar() {
+      return Container(
+        width: SizeConfig.screenWidth,
+        decoration: BoxDecoration(
+          color: kSecondaryColor.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: TextField(
+          controller: searchController,
+          onChanged: (value) => print(value),
+          decoration: InputDecoration(
+              contentPadding: EdgeInsets.symmetric(
+                  horizontal: getProportionateScreenWidth(20),
+                  vertical: getProportionateScreenHeight(15)),
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              hintText: "Search user...",
+              prefixIcon: Icon(Icons.search)),
+        ),
+      );
+    }
+
     Future<bool> _onWillPop() async {
       return (await showDialog(
             context: context,
@@ -118,29 +142,6 @@ class _BodyState extends State<Body> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Container buildSearchBar() {
-    return Container(
-      width: SizeConfig.screenWidth,
-      decoration: BoxDecoration(
-        color: kSecondaryColor.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(15),
-      ),
-      child: TextField(
-        controller: searchController,
-        onChanged: (value) => print(value),
-        decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-                horizontal: getProportionateScreenWidth(20),
-                vertical: getProportionateScreenHeight(15)),
-            border: InputBorder.none,
-            focusedBorder: InputBorder.none,
-            enabledBorder: InputBorder.none,
-            hintText: "Search user...",
-            prefixIcon: Icon(Icons.search)),
       ),
     );
   }

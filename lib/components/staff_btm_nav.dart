@@ -27,7 +27,7 @@ class StaffBottomNav extends StatelessWidget {
     buildNavButtons() {
       List<SizedBox> navButtonsList = [];
       SizedBox managerHomeBtn = SizedBox.fromSize(
-        size: Size(54, 54),
+        size: Size(60, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != StaffMenuState.home)
@@ -57,7 +57,7 @@ class StaffBottomNav extends StatelessWidget {
         ),
       );
       SizedBox adminManageBtn = SizedBox.fromSize(
-        size: Size(54, 54),
+        size: Size(60, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != StaffMenuState.admin)
@@ -89,7 +89,7 @@ class StaffBottomNav extends StatelessWidget {
         ),
       );
       SizedBox managerManageBtn = SizedBox.fromSize(
-        size: Size(54, 54),
+        size: Size(60, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != StaffMenuState.staff)
@@ -127,7 +127,7 @@ class StaffBottomNav extends StatelessWidget {
         ),
       );
       SizedBox tripReportBtn = SizedBox.fromSize(
-        size: Size(54, 54),
+        size: Size(60, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != StaffMenuState.trip_report)
@@ -145,7 +145,7 @@ class StaffBottomNav extends StatelessWidget {
                     : inActiveIconColor,
               ),
               Text(
-                "Trip",
+                "Trip Report",
                 style: TextStyle(
                     color: StaffMenuState.trip_report == selectedMenu
                         ? kPrimaryColor
@@ -157,7 +157,7 @@ class StaffBottomNav extends StatelessWidget {
         ),
       );
       SizedBox volunteerReportBtn = SizedBox.fromSize(
-        size: Size(54, 54),
+        size: Size(60, 54),
         child: GestureDetector(
           onTap: () {
             if (this.selectedMenu != StaffMenuState.volunteer_report)

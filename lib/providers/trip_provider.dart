@@ -43,6 +43,9 @@ class TripProvider with ChangeNotifier {
     }
   }
 
+  Trip getTrip(String tripId){
+    return _staffTrip.singleWhere((trip) => trip.tripId == tripId);
+  }
 
   List<Trip> getTripsByAdmin(String staffId){
     final List<Trip> tripList = [];

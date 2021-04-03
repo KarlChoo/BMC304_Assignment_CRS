@@ -2,6 +2,7 @@ import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/document.dart';
 import 'package:bmc304_assignment_crs/models/user.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Volunteer extends User {
   List<Document> volunteerDocument = [];
@@ -25,4 +26,26 @@ class Volunteer extends User {
             firstName: firstName,
             lastName: lastName,
             id: id);
+
+  int applicationsCreated(){
+    return this.applicationList.length;
+  }
+
+  int applicationsAccepted(){
+    int count = 0;
+    this.applicationList.forEach((application) {
+      if(application.status == "Accepted") count++;
+    });
+    return count;
+  }
+
+  int applicationsRejected(){
+    int count = 0;
+    this.applicationList.forEach((application) {
+      if(application.status == "Rejected") count++;
+    });
+    return count;
+  }
+
+
 }
