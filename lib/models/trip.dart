@@ -9,6 +9,7 @@ class Trip with ChangeNotifier {
   final String crisisType;
   final int numVolunteers;
   final String remark;
+  int availableNumVolunteers;
 
   final String staffId;
   final List<Application> applicationList = [];
@@ -22,5 +23,6 @@ class Trip with ChangeNotifier {
     @required this.numVolunteers,
     this.staffId,
     this.remark,
+    this.availableNumVolunteers,
   });
 }
