@@ -1,10 +1,8 @@
-import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:bmc304_assignment_crs/components/custom_surfix_icon.dart';
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/components/form_error.dart';
-import 'package:bmc304_assignment_crs/screens/complete_profile/complete_profile_screen.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_complete_profile/complete_profile_screen.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 import 'package:provider/provider.dart';

@@ -7,7 +7,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:bmc304_assignment_crs/models/document.dart';
 import 'package:path/path.dart';
 import 'package:provider/provider.dart';
-
 import '../../constants.dart';
 
 class UploadImagePage extends StatefulWidget {
@@ -111,20 +110,22 @@ class _UploadImagePageState extends State<UploadImagePage> {
                           ElevatedButton.styleFrom(primary: Color(0xFFFF7643)),
                       child: Text('Submit'),
                       onPressed: () async {
-                        if (_imageFile != null) {
-                          await uploadImageToFirebase(context);
-                          print(fileUrl);
-                          Document newDocument = Document(
-                            documentType: widget.selectedValue,
-                            documentImage: fileUrl,
-                            volunteerId: volunteerProvider.currentVolunteer.id,
-                            expiryDate: widget.selectedDate,
-                          );
-                          volunteerProvider.addDocument(newDocument);
-                          Navigator.pushNamedAndRemoveUntil(
-                              context,
-                              HomeScreen.routeName,
-                              (Route<dynamic> route) => false);
+                        if (widget.selectedValue == 'Passport') {
+                          if (_imageFile != null) {
+                            await uploadImageToFirebase(context);
+                            Document newDocument = Document(
+                              documentType: widget.selectedValue,
+                              documentImage: fileUrl,
+                              volunteerId:
+                                  volunteerProvider.currentVolunteer.id,
+                              expiryDate: widget.selectedDate,
+                            );
+                            volunteerProvider.addDocument(newDocument);
+                            Navigator.pushNamedAndRemoveUntil(
+                                context,
+                                HomeScreen.routeName,
+                                (Route<dynamic> route) => false);
+                          }
                         } else if (widget.selectedValue == 'Certificate') {
                           if (certName.text.isEmpty) {
                             showDialog(

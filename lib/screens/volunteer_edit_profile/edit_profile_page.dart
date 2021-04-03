@@ -41,13 +41,21 @@ class _EditProfilePageState extends State<EditProfilePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  void didChangeDependencies() {
+    // TODO: implement didChangeDependencies
     VolunteerProvider volunteerProvider =
         Provider.of<VolunteerProvider>(context);
+    super.didChangeDependencies();
     firstNameController.text = volunteerProvider.currentVolunteer.firstName;
     lastNameController.text = volunteerProvider.currentVolunteer.lastName;
     phoneNumberController.text = volunteerProvider.currentVolunteer.phone;
     passwordController.text = volunteerProvider.currentVolunteer.password;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    VolunteerProvider volunteerProvider =
+        Provider.of<VolunteerProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Update Profile'),
@@ -196,6 +204,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   TextFormField buildPhoneNumberFormField() {
     return TextFormField(
+      maxLength: 10,
       controller: phoneNumberController,
       keyboardType: TextInputType.phone,
       onSaved: (newValue) => phoneNumber = newValue,
@@ -215,6 +224,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
       decoration: InputDecoration(
         labelText: "Phone Number",
         hintText: "Enter your phone number",
+        counterText: '',
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: CustomSurffixIcon(svgIcon: "assets/icons/Phone.svg"),
       ),

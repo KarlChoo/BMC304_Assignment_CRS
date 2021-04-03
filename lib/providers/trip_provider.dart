@@ -70,6 +70,7 @@ class TripProvider with ChangeNotifier {
             'location': trip.location,
             'crisisType': trip.crisisType,
             'numVolunteers': trip.numVolunteers,
+            'availableNumVolunteers': trip.numVolunteers,
             'remark': trip.remark,
             'staffId': trip.staffId,
           }));
@@ -80,6 +81,7 @@ class TripProvider with ChangeNotifier {
           location: trip.location,
           crisisType: trip.crisisType,
           numVolunteers: trip.numVolunteers,
+          availableNumVolunteers: trip.numVolunteers,
           staffId: trip.staffId);
       //Add to local array only if operation success
       if (response.statusCode == 200) {
