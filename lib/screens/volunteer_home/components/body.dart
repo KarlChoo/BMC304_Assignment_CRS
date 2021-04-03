@@ -2,7 +2,7 @@ import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
-import 'package:bmc304_assignment_crs/screens/profile_page/profile_screen.dart';
+import 'file:///C:/Users/carls/Documents/GitHub/FYP/BMC304_Assignment_CRS/lib/screens/volunteer_edit_profile/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/all_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_trips_application/trips_application_page.dart';
@@ -75,10 +75,10 @@ class _BodyState extends State<Body> {
                                 alignment: Alignment.topLeft,
                                 child: Text(
                                   volunteerProvider
-                                              .currentVolunteer.firstName !=
+                                              .currentVolunteer.firstName ==
                                           null
-                                      ? '${volunteerProvider.currentVolunteer.firstName + volunteerProvider.currentVolunteer.lastName}'
-                                      : '-',
+                                      ? Container()
+                                      : '${volunteerProvider.currentVolunteer.firstName} ${volunteerProvider.currentVolunteer.lastName}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,

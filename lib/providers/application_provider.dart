@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:js';
-
 import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -41,7 +39,6 @@ class ApplicationProvider with ChangeNotifier {
       return null;
     }
   }
-
 
   Future<void> getApplicationOfAdmin(String staffId) async {
     this.clearApplicationList();
@@ -103,12 +100,13 @@ class ApplicationProvider with ChangeNotifier {
 
   Future<bool> updateStatus(Application application, String newStatus) async {
     try {
-      String updatestatusUrl = "https://bmc304-67ba7-default-rtdb.firebaseio.com/applications/${application.applicationId}.json";
+      String updatestatusUrl =
+          "https://bmc304-67ba7-default-rtdb.firebaseio.com/applications/${application.applicationId}.json";
       final response = await http.patch(Uri.parse(updatestatusUrl),
           body: json.encode({"status": newStatus}));
       if (response.statusCode == 200) {
-        final applicationIndex =
-        applicationList.indexWhere((arrApplication) => arrApplication.applicationId == application.applicationId);
+        final applicationIndex = applicationList.indexWhere((arrApplication) =>
+            arrApplication.applicationId == application.applicationId);
         applicationList[applicationIndex].status = newStatus;
         notifyListeners();
         return true;

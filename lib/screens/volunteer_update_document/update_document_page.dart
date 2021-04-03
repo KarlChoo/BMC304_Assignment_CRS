@@ -48,7 +48,7 @@ class _UpdateDocumentPageState extends State<UpdateDocumentPage> {
     ];
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Document'),
+        title: Text('Upload Document'),
       ),
       body: SingleChildScrollView(
         child: Padding(

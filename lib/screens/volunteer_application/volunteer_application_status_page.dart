@@ -28,14 +28,22 @@ class _ApplicationStatusState extends State<ApplicationStatus> {
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ListTile(
-                  title: applicationProvider.applicationList[index].status ==
-                          'New'
-                      ? Text(
-                          '${index + 1}. The trip is applying...',
-                          style: TextStyle(color: Colors.black),
-                        )
-                      : Text(
-                          '${index + 1}. ${applicationProvider.applicationList[index].status}'),
+                  title:
+                      applicationProvider.applicationList[index].status == 'New'
+                          ? Text(
+                              '${index + 1}. The trip is applying...',
+                              style: TextStyle(color: Colors.orange[300]),
+                            )
+                          : applicationProvider.applicationList[index].status ==
+                                  'Accepted'
+                              ? Text(
+                                  '${index + 1}. ${applicationProvider.applicationList[index].status}',
+                                  style: TextStyle(color: Colors.green),
+                                )
+                              : Text(
+                                  '${index + 1}. ${applicationProvider.applicationList[index].status}',
+                                  style: TextStyle(color: Colors.red),
+                                ),
                   subtitle:
                       Text(applicationProvider.applicationList[index].tripDate),
                   trailing: IconButton(
