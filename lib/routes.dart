@@ -10,8 +10,8 @@ import 'package:bmc304_assignment_crs/screens/manager_manage_staffs/manager_mana
 import 'package:bmc304_assignment_crs/screens/volunteer_application/all_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_application/volunteer_application_status_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_edit_profile/edit_profile_page.dart';
-import 'file:///C:/Users/carls/Documents/GitHub/FYP/BMC304_Assignment_CRS/lib/screens/volunteer_edit_profile/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/trip_report/trip_report.dart';
+import 'package:bmc304_assignment_crs/screens/volunteer_edit_profile/profile_screen.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_report/volunteer_report.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_trips_application/trips_application_page.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_update_document/update_document_page.dart';
