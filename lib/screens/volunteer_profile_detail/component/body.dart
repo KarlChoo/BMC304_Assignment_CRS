@@ -26,7 +26,9 @@ class _BodyState extends State<Body> {
     if(isInit){
       Volunteer volunteer = ModalRoute.of(context).settings.arguments;
       await Provider.of<ApplicationProvider>(context).getAllApplication(volunteer.id);
-      isInit = false;
+      setState(() {
+        isInit = false;
+      });
     }
     super.didChangeDependencies();
   }
@@ -36,6 +38,22 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     Volunteer volunteer = ModalRoute.of(context).settings.arguments;
     var volunteerApplications = Provider.of<ApplicationProvider>(context).applicationList;
+
+    int acceptedApplication() {
+      int count = 0;
+      volunteerApplications.forEach((application) {
+        if(application.status == "Accepted") count++;
+      });
+      return count;
+    }
+
+    int rejectedApplication() {
+      int count = 0;
+      volunteerApplications.forEach((application) {
+        if(application.status == "Rejected") count++;
+      });
+      return count;
+    }
 
     return SafeArea(
         child: SingleChildScrollView(
@@ -130,27 +148,27 @@ class _BodyState extends State<Body> {
                           ],
                         ),
                         Divider(),
-                        // Column(
-                        //   crossAxisAlignment: CrossAxisAlignment.start,
-                        //   children: [
-                        //     Text("Number of accepted/rejected applications", style: kStaffLabelText),
-                        //     Row(
-                        //       children: [
-                        //         Text(
-                        //           acceptedApplication().toString(),
-                        //           style: TextStyle(fontSize: 16, color: Colors.green),
-                        //           overflow: TextOverflow.visible,
-                        //         ),
-                        //         Text(" / ", style: kStaffDetailText,),
-                        //         Text(
-                        //           rejectedApplication().toString(),
-                        //           style: TextStyle(fontSize: 16, color: Colors.red),
-                        //           overflow: TextOverflow.visible,
-                        //         ),
-                        //       ],
-                        //     )
-                        //   ],
-                        // ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text("Number of accepted/rejected applications", style: kStaffLabelText),
+                            Row(
+                              children: [
+                                Text(
+                                  isInit ? "0" : acceptedApplication().toString(),
+                                  style: TextStyle(fontSize: 16, color: Colors.green),
+                                  overflow: TextOverflow.visible,
+                                ),
+                                Text(" / ", style: kStaffDetailText,),
+                                Text(
+                                  isInit ? "0" : rejectedApplication().toString(),
+                                  style: TextStyle(fontSize: 16, color: Colors.red),
+                                  overflow: TextOverflow.visible,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
                       ],
                     ),
                     SizedBox(
