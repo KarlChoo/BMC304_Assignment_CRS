@@ -31,7 +31,6 @@ class TripProvider with ChangeNotifier {
             staffId: tripData['staffId'],
             availableNumVolunteers: tripData['availableNumVolunteers'],
             remark: tripData["remark"],
-            availableNumVolunteers: tripData["availableNumVolunteers"],
           );
           loadingTrips.add(newTrip);
         });
