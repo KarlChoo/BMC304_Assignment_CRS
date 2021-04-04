@@ -47,6 +47,17 @@ class TripProvider with ChangeNotifier {
     return _staffTrip.singleWhere((trip) => trip.tripId == tripId);
   }
 
+  List<Trip> getTripsByVolunteer(String volunteerId){
+    final List<Trip> tripList = [];
+
+    // staffsTrip.forEach((trip){
+    //   if (trip.id == staffId){
+    //     tripList.add(trip);
+    //   }
+    // });
+    return tripList;
+  }
+
   List<Trip> getTripsByAdmin(String staffId){
     final List<Trip> tripList = [];
 
@@ -56,9 +67,6 @@ class TripProvider with ChangeNotifier {
       }
     });
     return tripList;
-
-
-
   }
 
   Future<bool> addTrip(Trip trip) async {

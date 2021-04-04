@@ -149,6 +149,7 @@ class _BodyState extends State<Body> {
                     ),
                     behavior: SnackBarBehavior.fixed,
                   ));
+                  disableBtn = false;
                   return;
                 }
 
@@ -164,7 +165,6 @@ class _BodyState extends State<Body> {
                     suspended: false,
                     dateJoined: joinedDateTime.microsecondsSinceEpoch);
                 final result = await staffProvider.addStaff(newStaff);
-                disableBtn = false;
                 String snackBarMsg = "";
                 if (result)
                   snackBarMsg = "New Admin Registered";
@@ -181,6 +181,7 @@ class _BodyState extends State<Body> {
                   ),
                   behavior: SnackBarBehavior.fixed,
                 ));
+                disableBtn = false;
                 if (result) {
                   Navigator.pop(context);
                 }

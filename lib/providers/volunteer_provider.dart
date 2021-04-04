@@ -73,6 +73,10 @@ class VolunteerProvider with ChangeNotifier {
               address: volunteerData["address"],
               phone: volunteerData["phone"],
           );
+
+
+          //newVolunteer.applicationList.add(value);
+
           loadingVolunteers.add(newVolunteer);
         });
         _systemVolunteers = loadingVolunteers;

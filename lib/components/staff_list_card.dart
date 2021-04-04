@@ -134,24 +134,43 @@ class StaffListCard extends StatelessWidget {
                           );
                           break;
                         case "delete":
-                          final result = await staffProvider.deleteStaff(staff.id);
-
-                          String snackBarMsg = "";
-                          if(result) snackBarMsg = "User ${staff.firstName} ${staff.lastName} has been deleted";
-                          else snackBarMsg = "Deletion of staff failed due to backend error";
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  snackBarMsg,
+                          await showDialog(
+                            context: context,
+                            builder: (context) => new AlertDialog(
+                              title: new Text('Are you sure?'),
+                              content: new Text('Do you want to delete this account?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () => Navigator.of(context).pop(),
+                                  child: Text('No'),
                                 ),
-                                duration: Duration(seconds: 2),
-                                action: SnackBarAction(
-                                  label: "Ok",
-                                  onPressed: () {  },
+                                TextButton(
+                                  onPressed: () async{
+                                    final result = await staffProvider.deleteStaff(staff.id);
+
+                                    String snackBarMsg = "";
+                                    if(result) snackBarMsg = "User ${staff.firstName} ${staff.lastName} has been deleted";
+                                    else snackBarMsg = "Deletion of staff failed due to backend error";
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                            snackBarMsg,
+                                          ),
+                                          duration: Duration(seconds: 2),
+                                          action: SnackBarAction(
+                                            label: "Ok",
+                                            onPressed: () {  },
+                                          ),
+                                          behavior: SnackBarBehavior.fixed,
+                                        )
+                                    );
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text('Yes'),
                                 ),
-                                behavior: SnackBarBehavior.fixed,
-                              )
+                              ],
+                            ),
                           );
                           break;
                       }
