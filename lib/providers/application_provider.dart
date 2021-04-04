@@ -59,7 +59,6 @@ class ApplicationProvider with ChangeNotifier {
             tripDate: applicationData['tripDate'],
           );
           if (newApplication.staffId == staffId) {
-            print("provider check");
             _applicationList.add(newApplication);
           }
         });

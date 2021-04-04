@@ -2,6 +2,7 @@ import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/screens/staff_edit_page/staff_edit_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +14,9 @@ class ApplicationListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final application = Provider.of<Application>(context);
     final applicationProvider = Provider.of<ApplicationProvider>(context);
+    final tripProvider = Provider.of<TripProvider>(context);
 
     buildTitle() {
-
-      print("buildTitle test");
       List<Expanded> titleList = [];
       Expanded title = Expanded(
         flex: 4,
@@ -65,8 +65,17 @@ class ApplicationListCard extends StatelessWidget {
             String snackBarMsg = "";
             if (value == "accept"){
               final result = await applicationProvider.updateStatus(application, "Accepted");
-              if (result)
+              if (result){
+                final deductResult = await tripProvider.deductNumVolunteer(application.tripId);
+                //if (deductResult){
+                  //snackBarMsg = "Deduction successful";
+                //}
+                //else{
+                  //snackBarMsg = "Deduction failed";
+                //}
                 snackBarMsg = "Application has been accepted";
+              }
+
               else
                 snackBarMsg = "Application acceptance failed";
             }
@@ -96,8 +105,6 @@ class ApplicationListCard extends StatelessWidget {
       );
 
       titleList.add(title);
-      print (application.status);
-      print (applicationProvider.applicationList.length);
       if (application.status=="New")
         titleList.add(action);
 

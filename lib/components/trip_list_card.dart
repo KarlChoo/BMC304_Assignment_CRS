@@ -88,7 +88,7 @@ class TripListCard extends StatelessWidget {
                 Icon(Icons.perm_contact_cal_outlined,color: Colors.grey,size: 14,),
                 SizedBox(width: getProportionateScreenWidth(5),),
                 Expanded(
-                  child: Text(trip.numVolunteers.toString(),
+                  child: Text('${trip.availableNumVolunteers.toString()}/${trip.numVolunteers.toString()} Volunteers needed',
                     style: TextStyle(
                       fontSize: 14,
                       color: Colors.grey,

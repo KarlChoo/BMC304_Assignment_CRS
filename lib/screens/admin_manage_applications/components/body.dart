@@ -44,8 +44,6 @@ class _BodyState extends State<Body> {
     StaffProvider staffProvider =  Provider.of<StaffProvider>(context);
     ApplicationProvider applicationProvider = Provider.of<ApplicationProvider>(context);
     var applicationList = applicationProvider.applicationList;
-    print("build test");
-    print(applicationList);
 
 
     Container buildSearchBar() {
@@ -135,7 +133,7 @@ class _BodyState extends State<Body> {
                             ),
                           )
                   )
-                      : Text("You have not registered any trip yet...")
+                      : Text("No volunteer application yet...")
                       : Column(
                     children: [
                       Text("Loading Data..."),

@@ -168,7 +168,6 @@ class _BodyState extends State<Body> {
         height: 2,
       ),
       onChanged: (String newValue) {
-        print(newValue);
         setState(() {
           crisisType = newValue;
         });
