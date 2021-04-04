@@ -9,8 +9,6 @@ class TripProvider with ChangeNotifier {
 
   List<Trip> get staffsTrip => _staffTrip;
 
-
-
   String tripsUrl =
       'https://bmc304-67ba7-default-rtdb.firebaseio.com/trips.json';
 
@@ -31,6 +29,7 @@ class TripProvider with ChangeNotifier {
             crisisType: tripData["crisisType"],
             numVolunteers: tripData["numVolunteers"],
             staffId: tripData['staffId'],
+            availableNumVolunteers: tripData['availableNumVolunteers'],
             remark: tripData["remark"],
           );
           loadingTrips.add(newTrip);
@@ -43,22 +42,19 @@ class TripProvider with ChangeNotifier {
     }
   }
 
-  Trip getTrip(String tripId){
+  Trip getTrip(String tripId) {
     return _staffTrip.singleWhere((trip) => trip.tripId == tripId);
   }
 
-  List<Trip> getTripsByAdmin(String staffId){
+  List<Trip> getTripsByAdmin(String staffId) {
     final List<Trip> tripList = [];
 
-    staffsTrip.forEach((trip){
-      if (trip.staffId == staffId){
+    staffsTrip.forEach((trip) {
+      if (trip.staffId == staffId) {
         tripList.add(trip);
       }
     });
     return tripList;
-
-
-
   }
 
   Future<bool> addTrip(Trip trip) async {

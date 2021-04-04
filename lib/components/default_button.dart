@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/constants.dart';
-
 import '../constants.dart';
 import '../size_config.dart';
 
@@ -21,8 +20,8 @@ class DefaultButton extends StatelessWidget {
       child: TextButton(
         style: TextButton.styleFrom(
             backgroundColor: kPrimaryColor,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20))
-        ),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20))),
         onPressed: press,
         child: Text(
           text,
