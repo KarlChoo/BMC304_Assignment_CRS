@@ -58,6 +58,32 @@ class TripProvider with ChangeNotifier {
     return tripList;
   }
 
+  Future<bool> deductNumVolunteer (String tripId) async{
+    try {
+    int newAmount;
+    _staffTrip.forEach((trip){
+      if (trip.tripId == tripId){
+        trip.availableNumVolunteers = trip.availableNumVolunteers -1;
+        newAmount = trip.availableNumVolunteers;
+
+      }
+    });
+      String tripDeductUrl =
+          "https://bmc304-67ba7-default-rtdb.firebaseio.com/trips/${tripId}.json";
+      final response = await http.patch(Uri.parse(tripDeductUrl),
+          body: json.encode({"availableNumVolunteers": newAmount}));
+      if (response.statusCode == 200) {
+        return true;
+      }
+
+
+    } catch (error){
+      print(error);
+    }
+    return false;
+
+  }
+
   Future<bool> addTrip(Trip trip) async {
     try {
       final response = await http.post(Uri.parse(tripsUrl),
