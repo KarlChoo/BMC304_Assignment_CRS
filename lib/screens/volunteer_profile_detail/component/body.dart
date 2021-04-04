@@ -1,10 +1,6 @@
 import 'package:bmc304_assignment_crs/components/default_button.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
 import 'package:bmc304_assignment_crs/providers/application_provider.dart';
-import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
-import 'package:bmc304_assignment_crs/screens/manager_home/components/staff_details.dart';
-import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
-import 'package:bmc304_assignment_crs/screens/volunteer_profile_detail/component/volunteer_details.dart';
 import 'package:bmc304_assignment_crs/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,6 +18,9 @@ class _BodyState extends State<Body> {
 
   bool isInit = true;
 
+  int acceptedApplication = 0;
+  int rejectedApplication = 0;
+
   @override
   void didChangeDependencies() async{
     if(isInit){
@@ -32,26 +31,11 @@ class _BodyState extends State<Body> {
     super.didChangeDependencies();
   }
 
+
   @override
   Widget build(BuildContext context) {
     Volunteer volunteer = ModalRoute.of(context).settings.arguments;
     var volunteerApplications = Provider.of<ApplicationProvider>(context).applicationList;
-
-    int acceptedApplication() {
-      int count = 0;
-      volunteerApplications.forEach((application) {
-        if(application.status == "Accepted") count++;
-      });
-      return count;
-    }
-
-    int rejectedApplication() {
-      int count = 0;
-      volunteerApplications.forEach((application) {
-        if(application.status == "Rejected") count++;
-      });
-      return count;
-    }
 
     return SafeArea(
         child: SingleChildScrollView(
@@ -146,27 +130,27 @@ class _BodyState extends State<Body> {
                           ],
                         ),
                         Divider(),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text("Number of accepted/rejected applications", style: kStaffLabelText),
-                            Row(
-                              children: [
-                                Text(
-                                  acceptedApplication().toString(),
-                                  style: TextStyle(fontSize: 16, color: Colors.green),
-                                  overflow: TextOverflow.visible,
-                                ),
-                                Text(" / ", style: kStaffDetailText,),
-                                Text(
-                                  rejectedApplication().toString(),
-                                  style: TextStyle(fontSize: 16, color: Colors.red),
-                                  overflow: TextOverflow.visible,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
+                        // Column(
+                        //   crossAxisAlignment: CrossAxisAlignment.start,
+                        //   children: [
+                        //     Text("Number of accepted/rejected applications", style: kStaffLabelText),
+                        //     Row(
+                        //       children: [
+                        //         Text(
+                        //           acceptedApplication().toString(),
+                        //           style: TextStyle(fontSize: 16, color: Colors.green),
+                        //           overflow: TextOverflow.visible,
+                        //         ),
+                        //         Text(" / ", style: kStaffDetailText,),
+                        //         Text(
+                        //           rejectedApplication().toString(),
+                        //           style: TextStyle(fontSize: 16, color: Colors.red),
+                        //           overflow: TextOverflow.visible,
+                        //         ),
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
                       ],
                     ),
                     SizedBox(
