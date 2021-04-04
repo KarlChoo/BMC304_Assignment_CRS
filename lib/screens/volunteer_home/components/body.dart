@@ -74,11 +74,7 @@ class _BodyState extends State<Body> {
                               Align(
                                 alignment: Alignment.topLeft,
                                 child: Text(
-                                  volunteerProvider
-                                              .currentVolunteer.firstName ==
-                                          null
-                                      ? Container()
-                                      : '${volunteerProvider.currentVolunteer.firstName} ${volunteerProvider.currentVolunteer.lastName}',
+                                  '${volunteerProvider.currentVolunteer.firstName} ${volunteerProvider.currentVolunteer.lastName}',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,

@@ -51,6 +51,38 @@ class VolunteerProvider with ChangeNotifier {
     }
   }
 
+  Future<void> getAllVolunteers() async {
+    try {
+      final response = await http.get(volunteerFileURL);
+      if (response.statusCode != 200) {
+        print('getAllVolunteers() method failed');
+        return;
+      }
+      final extractedData = json.decode(response.body) as Map<String, dynamic>;
+      final List<Volunteer> loadingVolunteers = [];
+
+      if (extractedData != null || extractedData.length > 0) {
+        extractedData.forEach((volunteerId, volunteerData) {
+          Volunteer newVolunteer = Volunteer(
+              id: volunteerId,
+              username: volunteerData["username"],
+              password: volunteerData["password"],
+              firstName: volunteerData["firstName"],
+              lastName: volunteerData["lastName"],
+              email: volunteerData["email"],
+              address: volunteerData["address"],
+              phone: volunteerData["phone"],
+          );
+          loadingVolunteers.add(newVolunteer);
+        });
+        _systemVolunteers = loadingVolunteers;
+        notifyListeners();
+      }
+    } catch (error) {
+      print(error);
+    }
+  }
+
   Future<void> getAllDocument(String id) async {
     try {
       Uri volunteerDocument = Uri.parse(

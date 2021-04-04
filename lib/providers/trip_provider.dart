@@ -29,6 +29,7 @@ class TripProvider with ChangeNotifier {
             crisisType: tripData["crisisType"],
             numVolunteers: tripData["numVolunteers"],
             staffId: tripData['staffId'],
+            availableNumVolunteers: tripData['availableNumVolunteers'],
             remark: tripData["remark"],
             availableNumVolunteers: tripData["availableNumVolunteers"],
           );
@@ -42,19 +43,19 @@ class TripProvider with ChangeNotifier {
     }
   }
 
+  Trip getTrip(String tripId) {
+    return _staffTrip.singleWhere((trip) => trip.tripId == tripId);
+  }
 
-  List<Trip> getTripsByAdmin(String staffId){
+  List<Trip> getTripsByAdmin(String staffId) {
     final List<Trip> tripList = [];
 
-    staffsTrip.forEach((trip){
-      if (trip.staffId == staffId){
+    staffsTrip.forEach((trip) {
+      if (trip.staffId == staffId) {
         tripList.add(trip);
       }
     });
     return tripList;
-
-
-
   }
 
   Future<bool> deductNumVolunteer (String tripId) async{

@@ -51,8 +51,12 @@ class _TripsApplicationState extends State<TripsApplication> {
             widget.tempList.removeWhere((element) =>
                 element.tripId ==
                 applicationProvider.applicationList[i].tripId);
-            if (widget.tempList[j].numVolunteers < 1) {
-              widget.tempList.removeAt(j);
+          }
+        }
+        if (widget.tempList.length > 0) {
+          for (int m = 0; m < widget.tempList.length; m++) {
+            if (widget.tempList[m].availableNumVolunteers == 0) {
+              widget.tempList.removeAt(m);
             }
           }
         }
@@ -91,7 +95,7 @@ class _TripsApplicationState extends State<TripsApplication> {
                         child: Column(
                           children: [
                             Text(
-                                'Required Volunteer: ${widget.tempList[index].numVolunteers}'),
+                                'Slot Available: ${widget.tempList[index].availableNumVolunteers}'),
                             Text('Country: ${widget.tempList[index].location}'),
                           ],
                         ),
