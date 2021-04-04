@@ -63,6 +63,7 @@ class _BodyState extends State<Body> {
                     SizedBox(
                       height: getProportionateScreenHeight(10),
                     ),
+                    Divider(),
                     Row(
                       children: [
                         Expanded(

@@ -25,11 +25,13 @@ class _BodyState extends State<Body> {
     if(isInit){
       final staffProvider = Provider.of<StaffProvider>(context);
       final tripProvider = Provider.of<TripProvider>(context);
+      final volunteerProvider = Provider.of<VolunteerProvider>(context);
 
       print('Loading Data');
       await Future.wait([
         staffProvider.getAllSystemStaff(),
         tripProvider.getAllTrips(),
+        volunteerProvider.getAllVolunteers()
       ]);
       print('Data loaded');
     }

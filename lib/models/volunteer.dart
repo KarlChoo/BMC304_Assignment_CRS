@@ -27,25 +27,4 @@ class Volunteer extends User {
             lastName: lastName,
             id: id);
 
-  int applicationsCreated(){
-    return this.applicationList.length;
-  }
-
-  int applicationsAccepted(){
-    int count = 0;
-    this.applicationList.forEach((application) {
-      if(application.status == "Accepted") count++;
-    });
-    return count;
-  }
-
-  int applicationsRejected(){
-    int count = 0;
-    this.applicationList.forEach((application) {
-      if(application.status == "Rejected") count++;
-    });
-    return count;
-  }
-
-
 }

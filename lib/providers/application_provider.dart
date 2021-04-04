@@ -40,6 +40,7 @@ class ApplicationProvider with ChangeNotifier {
     }
   }
 
+
   Future<void> getApplicationOfAdmin(String staffId) async {
     this.clearApplicationList();
     try {

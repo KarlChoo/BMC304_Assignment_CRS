@@ -2,6 +2,7 @@ import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
 import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:bmc304_assignment_crs/screens/sign_in/sign_in_screen.dart';
 import 'package:bmc304_assignment_crs/screens/trip_report/component/trip_detail_cards.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -40,6 +41,19 @@ class _BodyState extends State<Body> {
     final staffProvider = Provider.of<StaffProvider>(context);
     final tripProvider = Provider.of<TripProvider>(context);
     var tripList = tripProvider.staffsTrip;
+
+    //Wildfire, Earthquake, Flood, Others
+    List<int> disasterCount = [0,0,0,0];
+
+    tripList.forEach((trip) {
+      switch(trip.crisisType){
+        case "Wildfire": disasterCount[0]++; break;
+        case "Earthquake": disasterCount[1]++; break;
+        case "Flood": disasterCount[2]++; break;
+        default: disasterCount[3]++;
+      }
+    });
+
     Future<bool> _onWillPop() async {
       return (await showDialog(
         context: context,
@@ -75,6 +89,76 @@ class _BodyState extends State<Body> {
               buildSearchBar(),
               SizedBox(
                 height: getProportionateScreenHeight(20),
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/wildfire.png'),
+                            width: getProportionateScreenHeight(20),
+                            height: getProportionateScreenHeight(20),
+                          ),
+                          Text("Wildfire", style: TextStyle(fontSize: 10),),
+                          Text(disasterCount[0].toString())
+                        ]
+                      )
+                    )
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/earthquakes.png'),
+                            width: getProportionateScreenHeight(20),
+                            height: getProportionateScreenHeight(20),
+                          ),
+                          Text("Earthquakes", style: TextStyle(fontSize: 10),),
+                          Text(disasterCount[1].toString())
+                        ]
+                      ),
+                    )
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/flood.png'),
+                            width: getProportionateScreenHeight(20),
+                            height: getProportionateScreenHeight(20),
+                          ),
+                          Text("Floods", style: TextStyle(fontSize: 10),),
+                          Text(disasterCount[2].toString())
+                        ]
+                      )
+                    )
+                  ),
+                  Expanded(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage('assets/images/otherdisaster.jpg'),
+                            width: getProportionateScreenHeight(20),
+                            height: getProportionateScreenHeight(20),
+                          ),
+                          Text("Others", style: TextStyle(fontSize: 10),),
+                          Text(disasterCount[3].toString())
+                        ]
+                      )
+                    )
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: getProportionateScreenHeight(10),
               ),
               Expanded(
                 child: SingleChildScrollView(

@@ -1,23 +1,31 @@
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
-import 'package:bmc304_assignment_crs/providers/staff_provider.dart';
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:bmc304_assignment_crs/screens/volunteer_profile_detail/volunteer_profile_detail.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../size_config.dart';
 
-class VolunteerListCard extends StatelessWidget {
+class VolunteerListCard extends StatefulWidget {
+  @override
+  _VolunteerListCardState createState() => _VolunteerListCardState();
+}
+
+class _VolunteerListCardState extends State<VolunteerListCard> {
+
+
   @override
   Widget build(BuildContext context) {
-    final volunteerProvider = Provider.of<StaffProvider>(context);
     final volunteer = Provider.of<Volunteer>(context);
+
     return Card(
       color: Colors.white,
       shadowColor: Colors.grey,
       elevation: 2.0,
       child: InkWell(
         onTap: () {
-            Navigator.pushNamed(context, VolunteerDetail.routeName, arguments: volunteer);
+          Navigator.pushNamed(context, VolunteerDetail.routeName, arguments: volunteer);
         },
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 20),

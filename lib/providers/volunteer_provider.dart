@@ -2,6 +2,8 @@ import 'package:bmc304_assignment_crs/models/application.dart';
 import 'package:bmc304_assignment_crs/models/staff.dart';
 import 'package:bmc304_assignment_crs/models/user.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
+import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:bmc304_assignment_crs/models/document.dart';
 import 'dart:convert';
@@ -73,9 +75,6 @@ class VolunteerProvider with ChangeNotifier {
               address: volunteerData["address"],
               phone: volunteerData["phone"],
           );
-
-
-          //newVolunteer.applicationList.add(value);
 
           loadingVolunteers.add(newVolunteer);
         });

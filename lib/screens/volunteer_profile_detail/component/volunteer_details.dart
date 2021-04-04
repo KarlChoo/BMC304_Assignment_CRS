@@ -1,6 +1,8 @@
 import 'package:bmc304_assignment_crs/models/trip.dart';
 import 'package:bmc304_assignment_crs/models/volunteer.dart';
+import 'package:bmc304_assignment_crs/providers/application_provider.dart';
 import 'package:bmc304_assignment_crs/providers/trip_provider.dart';
+import 'package:bmc304_assignment_crs/providers/volunteer_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -16,12 +18,34 @@ class _VolunteerDetailsState extends State<VolunteerDetails> {
   final kStaffLabelText = TextStyle(fontSize: 12, color: Colors.blueAccent);
   final kStaffDetailText = TextStyle(fontSize: 16);
 
+  bool isInit = true;
+
+  @override
+  void didChangeDependencies() async{
+    if(isInit){
+      final volunteer = widget.volunteer;
+      await Provider.of<ApplicationProvider>(context).getAllApplication(volunteer.id);
+      isInit = false;
+    }
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    int tripsAttended(){
+    var volunteerApplications = Provider.of<ApplicationProvider>(context).applicationList;
+
+    int acceptedApplication() {
       int count = 0;
-      widget.volunteer.applicationList.forEach((application) {
-        Trip trip = Provider.of<TripProvider>(context).getTrip(application.tripId);
+      volunteerApplications.forEach((application) {
+        if(application.status == "Accepted") count++;
+      });
+      return count;
+    }
+
+    int rejectedApplication() {
+      int count = 0;
+      volunteerApplications.forEach((application) {
+        if(application.status == "Rejected") count++;
       });
       return count;
     }
@@ -72,9 +96,7 @@ class _VolunteerDetailsState extends State<VolunteerDetails> {
           children: [
             Text("Number of applications made", style: kStaffLabelText),
             Text(
-             "${widget.volunteer.applicationsCreated().toString()} | "
-               "${widget.volunteer.applicationsAccepted().toString()} | "
-               "${widget.volunteer.applicationsRejected().toString()} ",
+              volunteerApplications.length.toString(),
               style: kStaffDetailText,
               overflow: TextOverflow.visible,
             )
@@ -84,11 +106,21 @@ class _VolunteerDetailsState extends State<VolunteerDetails> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Number of trips attended", style: kStaffLabelText),
-            Text(
-              tripsAttended().toString(),
-              style: kStaffDetailText,
-              overflow: TextOverflow.visible,
+            Text("Number of accepted/rejected applications", style: kStaffLabelText),
+            Row(
+              children: [
+                Text(
+                  acceptedApplication().toString(),
+                  style: TextStyle(fontSize: 16, color: Colors.green),
+                  overflow: TextOverflow.visible,
+                ),
+                Text(" / ", style: kStaffDetailText,),
+                Text(
+                  rejectedApplication().toString(),
+                  style: TextStyle(fontSize: 16, color: Colors.red),
+                  overflow: TextOverflow.visible,
+                ),
+              ],
             )
           ],
         ),

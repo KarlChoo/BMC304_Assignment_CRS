@@ -9,7 +9,6 @@ import '../../../size_config.dart';
 class TripDetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final staffProvider = Provider.of<StaffProvider>(context);
     final tripProvider = Provider.of<TripProvider>(context);
     final trip = Provider.of<Trip>(context);
 
@@ -101,7 +100,7 @@ class TripDetailCard extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      "Participation Count: ${trip.applicationList.length} / ${trip.numVolunteers}",
+                      "Participation Count: ${trip.numVolunteers - trip.availableNumVolunteers} / ${trip.numVolunteers}",
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey,
