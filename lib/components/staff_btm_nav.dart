@@ -24,7 +24,7 @@ class StaffBottomNav extends StatelessWidget {
     final Color inActiveIconColor = Color(0xFFB6B6B6);
     final staffProvider = Provider.of<StaffProvider>(context);
 
-    buildNavButtons() {
+    List<SizedBox> buildNavButtons() {
       List<SizedBox> navButtonsList = [];
       SizedBox managerHomeBtn = SizedBox.fromSize(
         size: Size(60, 54),
@@ -100,13 +100,6 @@ class StaffBottomNav extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // SvgPicture.asset(
-              //   "assets/icons/Star Icon.svg",
-              //   width: 24,
-              //   color: StaffMenuState.staff == selectedMenu
-              //       ? kPrimaryColor
-              //       : inActiveIconColor,
-              // ),
               Icon(
                 Icons.handyman,
                 size: 28,

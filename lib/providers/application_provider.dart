@@ -17,6 +17,7 @@ class ApplicationProvider with ChangeNotifier {
       final response = await http.get(volunteerApplication);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
+        this.clearApplicationList();
         extractedData.forEach((applicationId, applicationData) {
           Application newApplication = Application(
             applicationId: applicationId,
@@ -42,11 +43,11 @@ class ApplicationProvider with ChangeNotifier {
 
 
   Future<void> getApplicationOfAdmin(String staffId) async {
-    this.clearApplicationList();
     try {
       final response = await http.get(volunteerApplication);
       final extractedData = json.decode(response.body) as Map<String, dynamic>;
       if (extractedData != null && extractedData.length > 0) {
+        this.clearApplicationList();
         extractedData.forEach((applicationId, applicationData) {
           Application newApplication = Application(
             applicationId: applicationId,
