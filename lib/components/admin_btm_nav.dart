@@ -67,15 +67,15 @@ class AdminBottomNav extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SvgPicture.asset(
-                "assets/icons/staff_card.svg",
-                width: 24,
+              Icon(
+                Icons.supervised_user_circle_outlined,
+                size: 28,
                 color: AdminMenuState.manage_application == selectedMenu
                     ? kPrimaryColor
                     : inActiveIconColor,
               ),
               Text(
-                "Applications",
+                "Application",
                 style: TextStyle(
                     color: AdminMenuState.manage_application == selectedMenu
                         ? kPrimaryColor

@@ -29,7 +29,7 @@ class _BodyState extends State<Body> {
   final locationController = new TextEditingController();
   final numVolunteersController = new TextEditingController();
   final tripDateController = new TextEditingController();
-  String crisisType ='Flood';
+  String crisisType;
   String description;
   String location;
   int numVolunteers;
@@ -172,11 +172,17 @@ class _BodyState extends State<Body> {
           crisisType = newValue;
         });
       },
+      isExpanded: true,
+      hint: Text(
+        'Select Crisis Type',
+        style: TextStyle(fontSize: 16),
+      ),
       items: <String>['Flood', 'Earthquake', 'Wildfire', 'Others']
           .map<DropdownMenuItem<String>>((String value) {
         return DropdownMenuItem<String>(
           value: value,
-          child: Text(value),
+          child: Text(value,
+            style: TextStyle(fontSize: 16),),
         );
       })
           .toList(),
@@ -205,7 +211,7 @@ class _BodyState extends State<Body> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 20),
-          child: Icon(Icons.location_on_outlined),
+          child: Icon(Icons.description_outlined),
         ),
       ),
     );
@@ -231,7 +237,7 @@ class _BodyState extends State<Body> {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         suffixIcon: Padding(
           padding: const EdgeInsets.only(right: 20),
-          child: Icon(Icons.account_circle_outlined),
+          child: Icon(Icons.map_outlined),
         ),
       ),
     );
