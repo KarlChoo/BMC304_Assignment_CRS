@@ -11,7 +11,7 @@ class StaffProvider extends ChangeNotifier {
   List<Staff> get systemStaffs => _systemStaffs;
 
   String url = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs.json';
-  String paramUrl = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs/';
+  String paramUrl = 'https://bmc304-67ba7-default-rtdb.firebaseio.com/staffs';
   Future<void> getAllSystemStaff() async {
     try {
       final response = await http.get(Uri.parse(url));
@@ -156,6 +156,8 @@ class StaffProvider extends ChangeNotifier {
           }));
       //Add to local array only if operation success
       if (response.statusCode == 200) {
+        String id = json.decode(response.body)['name'];
+        staff.id = id;
         systemStaffs.add(staff);
         notifyListeners();
         return true;

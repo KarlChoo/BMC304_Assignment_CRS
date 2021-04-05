@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class User with ChangeNotifier {
-  final String id;
+  String id;
   final String username;
   final String password;
   final String firstName;
